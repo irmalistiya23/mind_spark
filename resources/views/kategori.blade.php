@@ -120,7 +120,7 @@
         @endforeach
     </div>
 
-    <!-- Featured Books Section -->
+    <!-- Books Section -->
     <h2 class="section-title mt-5">Featured Books</h2>
     <div class="row g-4">
         @foreach ($bukus as $buku)
