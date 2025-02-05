@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BlogController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +18,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/home', [BlogController::class, 'home'])->name('home');
+Route::get('/account', [BlogController::class, 'account'])->name('account');
+Route::get('/favorite', [BlogController::class, 'favorite'])->name('favorite');
+Route::get('/chatcs', [BlogController::class, 'chatcs'])->name('chatcs');
+
+
+?>
