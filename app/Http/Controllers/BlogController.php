@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
+
     //sebelum login
     public function welcome(){
         return view('welcome');

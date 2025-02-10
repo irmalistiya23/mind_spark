@@ -49,8 +49,8 @@
       </nav>
 
       <div>
-        <a class="btn-getstarted-outline-primary " href="{{ url('/login') }}">Sign In</a>
-        <a class="btn-getstarted" href="{{ url('/register') }}">Sign Up</a>
+        <a class="btn-getstarted-outline-primary " href="{{ route('login') }}">Sign In</a>
+        <a class="btn-getstarted" href="{{ route('register') }}">Sign Up</a>
       </div>
 
 
@@ -58,9 +58,9 @@
     </div>
   </header>
 
-  <main>
+<main class="mt-5">
     @yield('konten')
-  </main>
+</main>
 
 <!-- Scroll Top -->
 <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
