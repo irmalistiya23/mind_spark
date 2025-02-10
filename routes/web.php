@@ -19,6 +19,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/welcome', [BlogController::class, 'welcome'])->name('welcome');
+Route::get('/about', [BlogController::class, 'about'])->name('about');
+Route::get('/contact', [BlogController::class, 'contact'])->name('contact');
+
+
+
+Route::get('/welcome', [BlogController::class, 'welcome'])->name('welcome');
 Route::get('/home', [BlogController::class, 'home'])->name('home');
 Route::get('/account', [BlogController::class, 'account'])->name('account');
 Route::get('/favorite', [BlogController::class, 'favorite'])->name('favorite');

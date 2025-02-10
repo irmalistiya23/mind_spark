@@ -6,10 +6,20 @@ use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
+    //sebelum login
     public function welcome(){
         return view('welcome');
     }
 
+    public function about(){
+        return view('about');
+    }
+
+    public function contact(){
+        return view('contact');
+    }
+    
+    //setelah login
     public function home(){
         return view('home');
     }
