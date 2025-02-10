@@ -21,12 +21,13 @@
               </div>
 
               <h1 class="mb-4">
-                Selamat Datang di <br>
+                Welcome to <br>
                 <span class="accent-text">MindSpark</span>
               </h1>
 
               <p class="mb-4 mb-md-5">
-                Jelajahi ribuan koleksi buku, jurnal, dan artikel dari berbagai bidang ilmu.
+                Explore collections of books, journals and articles from various fields of science.
+
               </p>
 
               <div class="hero-buttons">

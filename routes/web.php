@@ -19,12 +19,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//sebelum login
 Route::get('/welcome', [BlogController::class, 'welcome'])->name('welcome');
 Route::get('/about', [BlogController::class, 'about'])->name('about');
 Route::get('/contact', [BlogController::class, 'contact'])->name('contact');
 
 
-
+//setelah login
 Route::get('/welcome', [BlogController::class, 'welcome'])->name('welcome');
 Route::get('/home', [BlogController::class, 'home'])->name('home');
 Route::get('/account', [BlogController::class, 'account'])->name('account');
