@@ -10,45 +10,35 @@ class KategoriController extends Controller
 {
     public function index(Request $request)
     {
-        // Ambil semua kategori untuk sidebar
-        $kategoris = Kategori::all();
+        // Query dasar untuk buku dengan eager loading
+        $query = Buku::with(['kategoriBukus.kategori']);
         
-        // Mulai query builder untuk buku
-        $query = Buku::query();
-        
-        // Filter berdasarkan kategori yang dipilih
-        if ($request->has('kategori_id')) {
-            $query->where('kategori_id', $request->kategori_id);
-        }
-        
-        // Filter berdasarkan pencarian jika ada
-        if ($request->has('search')) {
+        // Filter berdasarkan pencarian
+        if ($request->has('search') && $request->search != '') {
             $search = $request->search;
             $query->where(function($q) use ($search) {
-                $q->where('judul', 'LIKE', "%{$search}%")
-                  ->orWhere('penulis', 'LIKE', "%{$search}%")
-                  ->orWhere('deskripsi', 'LIKE', "%{$search}%");
+                $q->where('NamaBuku', 'like', "%{$search}%")
+                  ->orWhere('penulis', 'like', "%{$search}%");
             });
         }
-        
-        // Ambil buku dengan pagination
-        $bukus = $query->latest()
-                      ->paginate(9)
-                      ->withQueryString();
-        
-        // Ambil nama kategori yang aktif jika ada
-        $activeKategori = null;
-        if ($request->has('kategori_id')) {
-            $activeKategori = Kategori::find($request->kategori_id);
+
+        // Filter berdasarkan kategori
+        if ($request->has('KategoriID') && $request->KategoriID != '') {
+            $query->whereHas('kategoriBukus', function($q) use ($request) {
+                $q->where('KategoriID', $request->KategoriID);
+            });
         }
-        
-        return view('kategori', compact('kategoris', 'bukus', 'activeKategori'));
+
+        $bukus = $query->get();
+        $kategoris = Kategori::all();
+
+        return view('kategori', compact('bukus', 'kategoris'));
     }
 
     public function show($id)
     {
         $kategori = Kategori::findOrFail($id);
-        $bukus = Buku::where('kategori_id', $id)->get();
+        $bukus = Buku::where('KategoriId', $id)->get();
         return view('kategori', compact('kategori', 'bukus'));
     }
 }

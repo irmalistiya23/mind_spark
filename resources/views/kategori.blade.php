@@ -34,9 +34,13 @@
                 <div class="category-container mb-4">
                     <h2 class="category-title">Category</h2>
                     <div class="category-list d-flex flex-wrap gap-2">
+                        <a href="{{ route('kategori') }}" 
+                           class="btn btn-outline-primary {{ !request('KategoriID') ? 'active' : '' }}">
+                            All Categories
+                        </a>
                         @foreach($kategoris as $kategori)
-                            <a href="{{ $kategori->KategoriID ? route('kategori', $kategori->KategoriID) : route('kategori') }}" 
-                               class="btn btn-outline-primary {{ request()->route('KategoriID') == $kategori->KategoriID ? 'active' : '' }}">
+                            <a href="{{ route('kategori', ['KategoriID' => $kategori->id]) }}" 
+                               class="btn btn-outline-primary {{ request('KategoriID') == $kategori->id ? 'active' : '' }}">
                                 {{ $kategori->NamaKategori }}
                             </a>
                         @endforeach
@@ -47,7 +51,7 @@
         
         <!-- Daftar Buku -->
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-            @foreach($bukus as $buku)
+            @forelse($bukus as $buku)
             <div class="col">
                 <div class="book-card h-100">
                     @if($buku->CoverBuku)
@@ -60,14 +64,27 @@
                     <div class="book-info">
                         <h5 class="book-title">{{ $buku->NamaBuku }}</h5>
                         <p class="book-author">{{ $buku->penulis }}</p>
+                        <p class="book-category">
+                            Categories: 
+                            @foreach($buku->kategoriBukus as $kategoriBuku)
+                                <span class="badge bg-primary">{{ $kategoriBuku->kategori->NamaKategori }}</span>
+                            @endforeach
+                        </p>
                     </div>
                 </div>
             </div>
-            @endforeach
+            @empty
+            <div class="col-12">
+                <div class="alert alert-info text-center">
+                    No books found in this category.
+                </div>
+            </div>
+            @endforelse
         </div>
         
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+</html>
 </html>

@@ -9,12 +9,15 @@ class Buku extends Model
 {
     use HasFactory;
 
+    protected $table = 'bukus';
+    
     protected $fillable = [
-        'judul',
-        'penulis',
-        'gambar',
+        'CoverBuku',
+        'NamaBuku',
         'deskripsi',
-        'kategori_id'
+        'penerbit',
+        'penulis',
+        'tanggal_terbit'
     ];
 
     public function favorits()
@@ -32,8 +35,15 @@ class Buku extends Model
         return $this->hasMany(Peminjaman::class, 'BukuID');
     }
 
-    public function kategori()
+    // Relasi dengan kategori_bukus
+    public function kategoriBukus()
     {
-        return $this->belongsTo(Kategori::class, 'kategori_id', 'KategoriID');
+        return $this->hasMany(KategoriBuku::class, 'BukuID', 'id');
+    }
+
+    // Relasi langsung dengan kategoris
+    public function kategoris()
+    {
+        return $this->belongsToMany(Kategori::class, 'kategori_bukus', 'BukuID', 'KategoriID');
     }
 }
