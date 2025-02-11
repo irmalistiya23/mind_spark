@@ -1,0 +1,67 @@
+.reviews {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.review-item {
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.review-item:last-child {
+    border-bottom: none;
+}
+
+.user-info strong {
+    color: #333;
+    font-size: 1rem;
+}
+
+.rating {
+    margin-top: 4px;
+    font-size: 0.9rem;
+}
+
+.review-content {
+    color: #555;
+    line-height: 1.6;
+    font-size: 0.95rem;
+    margin-top: 8px;
+}
+
+.additional-reviews {
+    max-height: 500px;
+    overflow-y: auto;
+    transition: all 0.3s ease;
+    padding-right: 10px;
+}
+
+.show-more-btn {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0;
+}
+
+.show-more-btn:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* Styling untuk scrollbar yang minimal */
+.additional-reviews::-webkit-scrollbar {
+    width: 4px;
+}
+
+.additional-reviews::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.additional-reviews::-webkit-scrollbar-thumb {
+    background: #ddd;
+    border-radius: 4px;
+}
+
+.additional-reviews::-webkit-scrollbar-thumb:hover {
+    background: #ccc;
+} 

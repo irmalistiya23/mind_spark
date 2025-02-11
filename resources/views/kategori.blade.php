@@ -54,29 +54,31 @@
             @forelse($bukus as $buku)
             <div class="col">
                 <div class="book-card h-100">
-                    @if($buku->CoverBuku)
-                        <img src="{{ asset('storage/cover_buku/' . $buku->CoverBuku) }}" 
-                             alt="{{ $buku->NamaBuku }}" 
-                             class="book-cover">
-                    @else
-                        <div class="no-image">No Image Available</div>
-                    @endif
-                    <div class="book-info">
-                        <h5 class="book-title">{{ $buku->NamaBuku }}</h5>
-                        <p class="book-author">{{ $buku->penulis }}</p>
-                        <p class="book-category">
-                            Categories: 
-                            @foreach($buku->kategoriBukus as $kategoriBuku)
-                                <span class="badge bg-primary">{{ $kategoriBuku->kategori->NamaKategori }}</span>
-                            @endforeach
-                        </p>
-                    </div>
+                    <a href="{{ route('buku.show', $buku->id) }}" class="text-decoration-none">
+                        @if($buku->CoverBuku)
+                            <img src="{{ asset('storage/cover_buku/' . $buku->CoverBuku) }}" 
+                                 alt="{{ $buku->NamaBuku }}" 
+                                 class="book-cover">
+                        @else
+                            <div class="no-image">No Image Available</div>
+                        @endif
+                        <div class="book-info">
+                            <h5 class="book-title">{{ $buku->NamaBuku }}</h5>
+                            <p class="book-author">{{ $buku->penulis }}</p>
+                            <p class="book-category">
+                                Categories: 
+                                @foreach($buku->kategoris as $kategori)
+                                    <span class="badge bg-primary">{{ $kategori->NamaKategori }}</span>
+                                @endforeach
+                            </p>
+                        </div>
+                    </a>
                 </div>
             </div>
             @empty
             <div class="col-12">
                 <div class="alert alert-info text-center">
-                    No books found in this category.
+                    No books found.
                 </div>
             </div>
             @endforelse
@@ -86,5 +88,4 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html>
-</html>
+</html></html>

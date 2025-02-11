@@ -1,7 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\BukuController;
+use App\Http\Controllers\UlasanController;
+use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,8 +16,27 @@ use App\Http\Controllers\KategoriController;
 |
 */
 
+// Route Autentikasi
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
+
+Route::get('/register', function () {
+    return view('auth.register');
+})->name('register');
+
+// Route Halaman Utama
 Route::get('/', function () {
     return view('welcome');
 });
 
+// Route Kategori dan Buku
 Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori');
+Route::get('/buku/{id}', [BukuController::class, 'show'])->name('buku.show');
+
+// Route Ulasan
+Route::middleware(['auth'])->group(function () {
+    Route::post('/ulasan', [UlasanController::class, 'store'])->name('ulasan.store');
+});
+
+?>

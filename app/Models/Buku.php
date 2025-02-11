@@ -2,15 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Buku extends Model
 {
-    use HasFactory;
-
     protected $table = 'bukus';
-    
+    protected $primaryKey = 'id';
+
     protected $fillable = [
         'CoverBuku',
         'NamaBuku',
@@ -20,30 +18,27 @@ class Buku extends Model
         'tanggal_terbit'
     ];
 
-    public function favorits()
-    {
-        return $this->hasMany(Favorit::class, 'BukuID');
-    }
-
-    public function ulasans()
-    {
-        return $this->hasMany(Ulasan::class, 'BukuID');
-    }
-
-    public function peminjamans()
-    {
-        return $this->hasMany(Peminjaman::class, 'BukuID');
-    }
-
-    // Relasi dengan kategori_bukus
-    public function kategoriBukus()
-    {
-        return $this->hasMany(KategoriBuku::class, 'BukuID', 'id');
-    }
-
-    // Relasi langsung dengan kategoris
+    // Relasi dengan kategori
     public function kategoris()
     {
         return $this->belongsToMany(Kategori::class, 'kategori_bukus', 'BukuID', 'KategoriID');
+    }
+
+    // Relasi dengan ulasan
+    public function ulasans()
+    {
+        return $this->hasMany(Ulasan::class, 'BukuID', 'id');
+    }
+
+    // Method untuk menghitung rata-rata rating
+    public function getAverageRatingAttribute()
+    {
+        return $this->ulasans()->avg('Rating') ?: 0;
+    }
+
+    // Method untuk mendapatkan jumlah ulasan
+    public function getReviewsCountAttribute()
+    {
+        return $this->ulasans()->count();
     }
 }

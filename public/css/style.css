@@ -261,4 +261,37 @@ body {
     display: inline-flex;
     align-items: center;
     white-space: nowrap;
+}
+
+.book-rating {
+    font-size: 1.2rem;
+}
+
+.book-rating .stars {
+    display: inline-block;
+}
+
+.book-rating .rating-text {
+    font-size: 1rem;
+    vertical-align: middle;
+}
+
+.review-item {
+    background-color: #f8f9fa;
+    transition: transform 0.2s;
+}
+
+.review-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.review-item .rating {
+    font-size: 0.9rem;
+    margin-top: 4px;
+}
+
+.review-content {
+    color: #555;
+    line-height: 1.6;
 } 

@@ -10,8 +10,8 @@ class KategoriController extends Controller
 {
     public function index(Request $request)
     {
-        // Query dasar untuk buku dengan eager loading
-        $query = Buku::with(['kategoriBukus.kategori']);
+        // Query dasar dengan eager loading kategori
+        $query = Buku::with('kategoris');
         
         // Filter berdasarkan pencarian
         if ($request->has('search') && $request->search != '') {
@@ -24,8 +24,8 @@ class KategoriController extends Controller
 
         // Filter berdasarkan kategori
         if ($request->has('KategoriID') && $request->KategoriID != '') {
-            $query->whereHas('kategoriBukus', function($q) use ($request) {
-                $q->where('KategoriID', $request->KategoriID);
+            $query->whereHas('kategoris', function($q) use ($request) {
+                $q->where('kategoris.id', $request->KategoriID);
             });
         }
 

@@ -11,16 +11,16 @@ class Kategori extends Model
 
     protected $table = 'kategoris';
     protected $primaryKey = 'id';
-    
+
     protected $fillable = ['NamaKategori'];
 
-    // Relasi dengan tabel kategori_bukus
+    // Relasi dengan kategori_bukus
     public function kategoriBukus()
     {
         return $this->hasMany(KategoriBuku::class, 'KategoriID', 'id');
     }
 
-    // Relasi dengan buku melalui kategori_bukus
+    // Relasi many-to-many dengan buku
     public function bukus()
     {
         return $this->belongsToMany(Buku::class, 'kategori_bukus', 'KategoriID', 'BukuID');
