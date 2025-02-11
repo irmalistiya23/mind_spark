@@ -26,4 +26,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Peminjaman::class, 'UserID');
     }
+
+    public function getFotoUrlAttribute() {
+        return $this->foto ? asset('storage/' . $this->foto) : asset('assets/img/avatar.png');
+    }
 }

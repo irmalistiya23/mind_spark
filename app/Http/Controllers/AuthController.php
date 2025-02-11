@@ -25,7 +25,7 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
-            return redirect()->route('dashboard'); // Redirect ke dashboard setelah login sukses
+            return redirect()->route('home'); // Redirect ke dashboard setelah login sukses
         }
 
         return back()->with('error', 'Email atau password salah.');

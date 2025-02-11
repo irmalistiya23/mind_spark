@@ -38,6 +38,12 @@
         .sidebar a:hover {
             background-color: #f0f0f0;
         }
+
+        .text-center{
+            margin-bottom: 10px
+        }
+
+
         main {
             margin-left: 250px;
             padding: 20px;
@@ -51,8 +57,12 @@
             <i class="bi bi-image"></i> Logo
         </div>
         <div class="text-center">
-            <div class="user-avatar"></div>
-            <strong>Username</strong>
+            <img src="{{ Auth::user()->foto_url }}"
+                alt="User Avatar"
+                class="user-avatar img-fluid rounded-circle">
+        </div>
+        <div class="text-center">
+            <strong>{{ Auth::user()->nama }}</strong>
         </div>
         <hr>
         <a href="{{ route('account') }}" class="d-block {{ request()->is('account') ? 'active' : '' }}" class="d-block">

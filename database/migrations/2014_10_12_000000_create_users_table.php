@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->string('alamat');
             $table->string('password');
             $table->string('role')->default('user'); // Beri default role
+            $table->string('foto')->nullable();
             $table->unsignedInteger('jumlah_pelanggaran')->default(0);
             $table->timestamps();
         });

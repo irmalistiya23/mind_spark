@@ -33,7 +33,7 @@ Route::get('/account', [BlogController::class, 'account'])->name('account');
 Route::get('/favorite', [BlogController::class, 'favorite'])->name('favorite');
 Route::get('/chatcs', [BlogController::class, 'chatcs'])->name('chatcs');
 
-//ngatur login register
+//ngatur login register logout
 Route::get('/', [BlogController::class, 'index'])->name('welcome');
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
