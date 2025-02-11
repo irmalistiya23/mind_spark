@@ -172,5 +172,27 @@
             </div>
 
     </div>
+
+    <!-- Tambahkan script di bagian bawah file -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const showMoreBtn = document.querySelector('.show-more-btn');
+        const additionalReviews = document.querySelector('.additional-reviews');
+
+        if (showMoreBtn) {
+            showMoreBtn.addEventListener('click', function() {
+                if (additionalReviews.style.display === 'none') {
+                    additionalReviews.style.display = 'block';
+                    showMoreBtn.textContent = 'Show Less';
+                    additionalReviews.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                } else {
+                    additionalReviews.style.display = 'none';
+                    showMoreBtn.textContent = 'Show More';
+                    document.querySelector('.reviews').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            });
+        }
+    });
+    </script>
 </body>
 </html>

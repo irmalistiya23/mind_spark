@@ -5,6 +5,7 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\UlasanController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ManageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,6 +38,15 @@ Route::get('/buku/{id}', [BukuController::class, 'show'])->name('buku.show');
 // Route Ulasan
 Route::middleware(['auth'])->group(function () {
     Route::post('/ulasan', [UlasanController::class, 'store'])->name('ulasan.store');
+});
+
+//Route Manage User oleh Admin
+Route::prefix('manage')->group(function () {
+    Route::get('/', [ManageController::class, 'index'])->name('manage');
+    Route::delete('/users/{id}', [ManageController::class, 'destroy'])->name('manage.destroy');
+    Route::get('/books/create', [ManageController::class, 'create'])->name('manage.books.create');
+    Route::post('/books', [ManageController::class, 'store'])->name('manage.books.store');
+    Route::delete('/books/{id}', [ManageController::class, 'destroyBook'])->name('manage.books.destroy');
 });
 
 ?>
