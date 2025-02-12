@@ -27,7 +27,7 @@
         <a href="{{ route('account') }}" class="d-block {{ request()->is('account') ? 'active' : '' }}" class="d-block">
             <i class="bi bi-person icon-custom"></i> Account
         </a>
-        <a href="{{ route('home') }}" class="d-block {{ request()->is('home') ? 'active' : '' }}">
+        <a href="{{ route('kategori') }}" class="d-block {{ request()->is('kategori') ? 'active' : '' }}">
             <i class="bi bi-house icon-custom"></i> Home
         </a>
         <a href="{{ route('favorite') }}" class="d-block {{ request()->is('favorite') ? 'active' : '' }}" class="d-block">

@@ -38,4 +38,16 @@ class User extends Authenticatable
     {
         return $this->foto ? asset('storage/' . $this->foto) : asset('assets/img/avatar.png');
     }
+
+    
+     //relasi ke model favorit
+    public function favorites()
+    {
+        return $this->hasMany(Favorit::class, 'UserID');
     }
+ 
+    public function hasFavorited($bukuId)
+    {
+        return $this->favorites()->where('BukuID', $bukuId)->exists();
+    }
+}
