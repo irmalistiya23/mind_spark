@@ -83,7 +83,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="mb-3">
-                            <a href="{{ route('manage') }}" class="btn btn-primary">
+                            <a href="{{ route('manage.books.create') }}" class="btn btn-primary">
                                 <i class="fas fa-plus"></i> Add New Book
                             </a>
                         </div>

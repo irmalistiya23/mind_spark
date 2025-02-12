@@ -43,35 +43,29 @@ class ManageController extends Controller
             'kategoris' => 'required|array',
         ]);
 
-        $imageName = time().'.'.$request->CoverBuku->extension();
-        $request->CoverBuku->storeAs('public/cover_buku', $imageName);
+        if ($request->hasFile('CoverBuku')) {
+            $image = $request->file('CoverBuku');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public/cover_buku', $imageName);
+        }
 
         $buku = Buku::create([
             'NamaBuku' => $request->NamaBuku,
             'penulis' => $request->penulis,
             'penerbit' => $request->penerbit,
             'deskripsi' => $request->deskripsi,
-            'CoverBuku' => $imageName,
-            'tanggal_terbit' => now(),
+            'CoverBuku' => $imageName ?? null,
         ]);
 
-        $buku->kategoris()->attach($request->kategoris);
+        if ($request->has('kategoris')) {
+            $buku->kategoris()->attach($request->kategoris);
+        }
 
         return redirect()->route('manage')
             ->with('success', 'Buku berhasil ditambahkan!');
     }
 
-    public function destroyBook($id)
-    {
-        $book = Buku::findOrFail($id);
-        if($book->CoverBuku) {
-            Storage::delete('public/cover_buku/' . $book->CoverBuku);
-        }
-        $book->kategoris()->detach(); // Hapus relasi dengan kategori
-        $book->delete();
-        return redirect()->route('manage')->with('success', 'Buku berhasil dihapus');
-    }
-
+    // Edit Book
     public function edit($id)
     {
         $buku = Buku::with('kategoris')->findOrFail($id);
@@ -92,9 +86,8 @@ class ManageController extends Controller
 
         $buku = Buku::findOrFail($id);
 
-        // Handle cover buku jika ada upload baru
         if ($request->hasFile('CoverBuku')) {
-            // Hapus cover lama jika ada
+            // Hapus cover lama
             if ($buku->CoverBuku) {
                 Storage::delete('public/cover_buku/' . $buku->CoverBuku);
             }
@@ -107,7 +100,6 @@ class ManageController extends Controller
             $buku->CoverBuku = $imageName;
         }
 
-        // Update data buku
         $buku->update([
             'NamaBuku' => $request->NamaBuku,
             'penulis' => $request->penulis,
@@ -115,10 +107,20 @@ class ManageController extends Controller
             'deskripsi' => $request->deskripsi,
         ]);
 
-        // Update kategori
         $buku->kategoris()->sync($request->kategoris);
 
         return redirect()->route('manage')
             ->with('success', 'Buku berhasil diupdate!');
+    }
+
+    public function destroyBook($id)
+    {
+        $book = Buku::findOrFail($id);
+        if($book->CoverBuku) {
+            Storage::delete('public/cover_buku/' . $book->CoverBuku);
+        }
+        $book->kategoris()->detach();
+        $book->delete();
+        return redirect()->route('manage')->with('success', 'Buku berhasil dihapus');
     }
 }
