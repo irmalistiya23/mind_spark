@@ -5,22 +5,23 @@
 
 <div class="account-container">
     <div class="account-card">
-        <div class="avatar-container">
 
-            <img src="{{ Auth::user()->foto ? asset('storage/' . Auth::user()->foto) : asset('assets/img/avatar.png') }}" alt="User Avatar" class="avatar" id="preview-avatar">
-        </div>
-        <div class="avatar-container">
-            <label for="foto" class="edit-photo">
-                <i class="bi bi-camera"></i> Change Photo
-            </label>
-            <input type="file" id="foto" name="foto" hidden>
-        </div>
 
         
 
         <form action="{{ route('account.update') }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
+            <div class="avatar-container">
+
+                <img src="{{ Auth::user()->foto ? asset('storage/' . Auth::user()->foto) : asset('assets/img/avatar.png') }}" alt="User Avatar" class="avatar" id="preview-avatar">
+            </div>
+            <div class="avatar-container">
+                <label for="foto" class="edit-photo">
+                    <i class="bi bi-camera"></i> Change Photo
+                </label>
+                <input type="file" id="foto" name="foto" hidden>
+            </div>
             <div class="form-row">
                 <div class="form-group">
                     <label for="nis">NIS</label>

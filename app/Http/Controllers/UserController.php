@@ -32,13 +32,6 @@ class UserController extends Controller
             // Simpan path ke database
             $user->foto = $fotoPath;
         }
-
-        if ($request->hasFile('foto')) {
-            $file = $request->file('foto');
-            $path = $file->store('public'); // Simpan di storage/app/public
-        
-            dd($path); // Cek apakah path muncul
-        }
         
 
         $user->nama = $request->nama;
