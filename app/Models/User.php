@@ -10,7 +10,14 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    protected $fillable = ['nis', 'nama', 'email', 'alamat', 'password', 'role'];
+    protected $fillable = [
+        'nis', 
+        'nama',
+        'email', 
+        'alamat', 
+        'password', 
+        'foto', 
+        'role'];
 
     public function favorits()
     {
@@ -27,7 +34,8 @@ class User extends Authenticatable
         return $this->hasMany(Peminjaman::class, 'UserID');
     }
 
-    public function getFotoUrlAttribute() {
+    public function getFotoUrlAttribute()
+    {
         return $this->foto ? asset('storage/' . $this->foto) : asset('assets/img/avatar.png');
     }
-}
+    }

@@ -8,57 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <style>
-        body {
-            background-color: #1c1c1c;
-            font-family: "Poppins", serif;
-            font-weight: 500;
-            font-style: normal;
-        }
-        .sidebar {
-            height: 100vh;
-            width: 250px;
-            background: #ffffff;
-            padding: 20px;
-            position: fixed;
-            left: 0;
-            top: 0;
-            overflow-y: auto;
-        }
-        .user-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            margin: 10px auto;
-        }
-        .icon-custom {
-            font-size: 24px;
-            color: #000000; /* Warna biru */
-            margin-right: 10px; /* Spasi antara ikon dan teks */
-        }
-        .sidebar a {
-            color: black;
-            font-weight: 500;
-            text-decoration: none;
-            display: block;
-            padding: 15px;
-            border-radius: 10px;
-        }
-        .sidebar a:hover {
-            background-color: #f0f0f0;
-        }
-
-        .text-center{
-            margin-bottom: 10px
-        }
-
-
-        main {
-            margin-left: 250px;
-            padding: 20px;
-            color: white;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('assets/css/sidebar.css')}}">
 </head>
 <body>
     <div class="sidebar">
