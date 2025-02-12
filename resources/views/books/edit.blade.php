@@ -3,19 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MindSpark</title>
+    <title>Edit Book - MindSpark</title>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/manage.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
     <div class="container mt-4">
         <div class="row mb-4">
             <div class="col">
-                <h2>Add New Book</h2>
+                <h2>Edit Book</h2>
             </div>
         </div>
 
@@ -31,31 +29,32 @@
 
         <div class="card">
             <div class="card-body">
-                <form action="{{ route('manage.books.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('manage.books.update', $buku->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
                     
                     <div class="mb-3">
                         <label for="NamaBuku" class="form-label">Judul Buku</label>
                         <input type="text" class="form-control" id="NamaBuku" name="NamaBuku" 
-                               value="{{ old('NamaBuku') }}" required>
+                               value="{{ old('NamaBuku', $buku->NamaBuku) }}" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="penulis" class="form-label">Penulis</label>
                         <input type="text" class="form-control" id="penulis" name="penulis" 
-                               value="{{ old('penulis') }}" required>
+                               value="{{ old('penulis', $buku->penulis) }}" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="penerbit" class="form-label">Penerbit</label>
                         <input type="text" class="form-control" id="penerbit" name="penerbit" 
-                               value="{{ old('penerbit') }}" required>
+                               value="{{ old('penerbit', $buku->penerbit) }}" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="deskripsi" class="form-label">Deskripsi</label>
                         <textarea class="form-control" id="deskripsi" name="deskripsi" 
-                                  rows="4" required>{{ old('deskripsi') }}</textarea>
+                                  rows="4" required>{{ old('deskripsi', $buku->deskripsi) }}</textarea>
                     </div>
 
                     <div class="mb-3">
@@ -67,7 +66,7 @@
                                         <input class="form-check-input" type="checkbox" 
                                                name="kategoris[]" value="{{ $kategori->id }}" 
                                                id="kategori{{ $kategori->id }}"
-                                               {{ in_array($kategori->id, old('kategoris', [])) ? 'checked' : '' }}>
+                                               {{ in_array($kategori->id, old('kategoris', $buku->kategoris->pluck('id')->toArray())) ? 'checked' : '' }}>
                                         <label class="form-check-label" for="kategori{{ $kategori->id }}">
                                             {{ $kategori->NamaKategori }}
                                         </label>
@@ -79,8 +78,15 @@
 
                     <div class="mb-3">
                         <label for="CoverBuku" class="form-label">Cover Buku</label>
+                        @if($buku->CoverBuku)
+                            <div class="mb-2">
+                                <img src="{{ asset('storage/cover_buku/' . $buku->CoverBuku) }}" 
+                                     alt="Current Cover" style="max-height: 200px;">
+                            </div>
+                        @endif
                         <input type="file" class="form-control" id="CoverBuku" name="CoverBuku" 
-                               accept="image/jpeg,image/png,image/jpg" required>
+                               accept="image/jpeg,image/png,image/jpg">
+                        <div class="form-text">Biarkan kosong jika tidak ingin mengubah cover</div>
                         <div id="imagePreview" class="mt-2" style="display: none;">
                             <img src="" alt="Preview" style="max-height: 200px;">
                         </div>
@@ -88,7 +94,7 @@
 
                     <div class="text-end">
                         <a href="{{ route('manage') }}" class="btn btn-secondary me-2">Batal</a>
-                        <button type="submit" class="btn btn-primary">Simpan Buku</button>
+                        <button type="submit" class="btn btn-primary">Update Buku</button>
                     </div>
                 </form>
             </div>
@@ -114,4 +120,4 @@
         });
     </script>
 </body>
-</html>
+</html> 

@@ -71,4 +71,54 @@ class ManageController extends Controller
         $book->delete();
         return redirect()->route('manage')->with('success', 'Buku berhasil dihapus');
     }
+
+    public function edit($id)
+    {
+        $buku = Buku::with('kategoris')->findOrFail($id);
+        $kategoris = Kategori::all();
+        return view('books.edit', compact('buku', 'kategoris'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'NamaBuku' => 'required',
+            'penulis' => 'required',
+            'penerbit' => 'required',
+            'deskripsi' => 'required',
+            'CoverBuku' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'kategoris' => 'required|array',
+        ]);
+
+        $buku = Buku::findOrFail($id);
+
+        // Handle cover buku jika ada upload baru
+        if ($request->hasFile('CoverBuku')) {
+            // Hapus cover lama jika ada
+            if ($buku->CoverBuku) {
+                Storage::delete('public/cover_buku/' . $buku->CoverBuku);
+            }
+            
+            // Upload cover baru
+            $image = $request->file('CoverBuku');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public/cover_buku', $imageName);
+            
+            $buku->CoverBuku = $imageName;
+        }
+
+        // Update data buku
+        $buku->update([
+            'NamaBuku' => $request->NamaBuku,
+            'penulis' => $request->penulis,
+            'penerbit' => $request->penerbit,
+            'deskripsi' => $request->deskripsi,
+        ]);
+
+        // Update kategori
+        $buku->kategoris()->sync($request->kategoris);
+
+        return redirect()->route('manage')
+            ->with('success', 'Buku berhasil diupdate!');
+    }
 }

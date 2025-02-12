@@ -122,8 +122,7 @@
                                                 @endforeach
                                             </td>
                                             <td>
-                                                <a href="{{ route('manage', $book->id) }}" 
-                                                   class="btn btn-warning btn-sm">
+                                                <a href="{{ route('manage.books.edit', $book->id) }}" class="btn btn-warning btn-sm">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
                                                 <form action="{{ route('manage.books.destroy', $book->id) }}" 

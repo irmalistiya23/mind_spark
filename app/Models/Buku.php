@@ -10,12 +10,11 @@ class Buku extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'CoverBuku',
         'NamaBuku',
-        'deskripsi',
-        'penerbit',
         'penulis',
-        'tanggal_terbit'
+        'penerbit',
+        'deskripsi',
+        'CoverBuku'
     ];
 
     // Relasi dengan kategori
