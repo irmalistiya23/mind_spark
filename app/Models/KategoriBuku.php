@@ -9,15 +9,17 @@ class KategoriBuku extends Model
 {
     use HasFactory;
 
+    protected $table = 'kategori_bukus';
+    
     protected $fillable = ['BukuID', 'KategoriID'];
 
     public function buku()
     {
-        return $this->belongsTo(Buku::class, 'BukuID');
+        return $this->belongsTo(Buku::class, 'BukuID', 'id');
     }
 
     public function kategori()
     {
-        return $this->belongsTo(Kategori::class, 'KategoriID');
+        return $this->belongsTo(Kategori::class, 'KategoriID', 'id');
     }
 }
