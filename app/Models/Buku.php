@@ -47,4 +47,13 @@ class Buku extends Model
     {
         return $this->hasMany(Favorit::class, 'BukuID');
     }
+
+    //relasi ke peminjaman
+    public function peminjamanAktif()
+    {
+        return $this->hasOne(Peminjaman::class, 'BukuID')
+            ->where('UserID', auth()->id())
+            ->where('StatusPeminjaman', 'dipinjam');
+    }
+
 }

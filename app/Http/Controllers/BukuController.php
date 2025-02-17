@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class BukuController extends Controller
 {
+    
     public function show($id)
     {
         // Ambil data buku beserta relasinya (kategori dan ulasan)

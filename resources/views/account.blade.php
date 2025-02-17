@@ -14,7 +14,7 @@
             @method('PUT')
             <div class="avatar-container">
 
-                <img src="{{ Auth::user()->foto ? asset('storage/' . Auth::user()->foto) : asset('assets/img/avatar.png') }}" alt="User Avatar" class="avatar" id="preview-avatar">
+                <img src="{{{ Auth::user()->foto_url }}}" alt="User Avatar" class="avatar" id="preview-avatar">
             </div>
             <div class="avatar-container">
                 <label for="foto" class="edit-photo">

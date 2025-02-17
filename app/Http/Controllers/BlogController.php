@@ -26,6 +26,10 @@ class BlogController extends Controller
         return view('home');
     }
 
+    public function bookshelf(){
+        return view('bookshelf');
+    }
+
     public function favorite(){
         return view('favorite');
     }

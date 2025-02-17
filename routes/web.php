@@ -9,6 +9,8 @@ use App\Http\Controllers\BukuController;
 use App\Http\Controllers\UlasanController;
 use App\Http\Controllers\ManageController;
 use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\PeminjamanController;
+
 
 
 
@@ -40,6 +42,8 @@ Route::get('/home', [BlogController::class, 'home'])->name('home');
 
 Route::get('/account', [BlogController::class, 'account'])->name('account');
 Route::put('/account/update', [UserController::class, 'update'])->name('account.update')->middleware('auth');
+
+Route::get('/bookshelf', [PeminjamanController::class, 'index'])->name('bookshelf');
 
 Route::get('/favorite', [BlogController::class, 'favorite'])->name('favorite');
 Route::get('/chatcs', [BlogController::class, 'chatcs'])->name('chatcs');
@@ -84,6 +88,9 @@ Route::post('/favorite/{action}/{bukuId}', [FavoriteController::class, 'toggleFa
 // Route untuk melihat daftar buku favorit
 Route::get('/favorite', [FavoriteController::class, 'favoriteList'])->name('favorite');
 
+//peminjaman
+Route::post('/books/{id}/borrow', [PeminjamanController::class, 'borrow'])->name('borrowBook');
+Route::post('/books/{id}/return', [PeminjamanController::class, 'return'])->name('returnBook');
 
 
 

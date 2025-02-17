@@ -4,11 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
 class Peminjaman extends Model
 {
     use HasFactory;
 
+    protected $table = 'peminjaman'; // Sesuaikan dengan nama tabel di database
     protected $fillable = ['UserID', 'BukuID', 'TanggalPeminjaman', 'TanggalPengembalian', 'StatusPeminjaman'];
 
     public function user()
@@ -21,3 +21,4 @@ class Peminjaman extends Model
         return $this->belongsTo(Buku::class, 'BukuID');
     }
 }
+

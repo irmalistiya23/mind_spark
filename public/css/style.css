@@ -1,5 +1,6 @@
-body {
-    font-family: "Poppins", serif;
+body{
+    background-color: white;
+    font-family: 'Poppins', sans-serif;
     font-weight: 100;
     font-style: normal;
 }
@@ -232,7 +233,7 @@ body {
     color: #333;
     margin-bottom: 8px;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    /* -webkit-line-clamp: 2; */
     -webkit-box-orient: vertical;
     overflow: hidden;
     line-height: 1.3;
