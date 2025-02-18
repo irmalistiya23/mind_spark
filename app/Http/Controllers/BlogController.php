@@ -31,8 +31,8 @@ class BlogController extends Controller
     }
 
     public function chatcs(){
-        return view('chatcs');
-    }
+        return redirect('/chatify');
+    } 
 
     public function account(){
         return view('account');
