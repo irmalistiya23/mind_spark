@@ -40,4 +40,11 @@ class Buku extends Model
     {
         return $this->ulasans()->count();
     }
+
+    
+    //relasi ke model favorit
+    public function favorites()
+    {
+        return $this->hasMany(Favorit::class, 'BukuID');
+    }
 }

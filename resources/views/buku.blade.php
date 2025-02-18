@@ -1,3 +1,5 @@
+@extends('master')
+@section('konten')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -154,11 +156,18 @@
                 </div>
             </div>
         </div>
-
         <div class="row">
             <!-- Cover Buku -->
             <div class="col-md-4">
-                <div class="book-cover-container">
+                <div class="book-cover-container position-relative">
+                    <!-- Tombol Favorit -->
+                    <form action="{{ route('favorites.toggle', ['action' => auth()->user()->favorites->contains('BukuID', $buku->id) ? 'remove' : 'add', 'bukuId' => $buku->id]) }}" method="POST" class="position-absolute top-0 end-0 p-2">
+                        @csrf
+                        <button type="submit" class="btn border-0 bg-transparent">
+                            <i class="bi bi-star{{ auth()->user()->favorites->contains('BukuID', $buku->id) ? '-fill' : '' }} fs-3 text-warning" aria-hidden="true"></i>
+                        </button>
+                    </form>
+        
                     @if($buku->CoverBuku)
                         <img src="{{ asset('storage/cover_buku/' . $buku->CoverBuku) }}" 
                              alt="{{ $buku->NamaBuku }}" 
@@ -170,29 +179,33 @@
                     @endif
                 </div>
             </div>
+        </div>
+        
+        
+        
 
     </div>
 
-    <!-- Tambahkan script di bagian bawah file -->
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const showMoreBtn = document.querySelector('.show-more-btn');
-        const additionalReviews = document.querySelector('.additional-reviews');
-
-        if (showMoreBtn) {
-            showMoreBtn.addEventListener('click', function() {
-                if (additionalReviews.style.display === 'none') {
-                    additionalReviews.style.display = 'block';
-                    showMoreBtn.textContent = 'Show Less';
-                    additionalReviews.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                } else {
-                    additionalReviews.style.display = 'none';
-                    showMoreBtn.textContent = 'Show More';
-                    document.querySelector('.reviews').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                }
-            });
-        }
-    });
-    </script>
 </body>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const showMoreBtn = document.querySelector('.show-more-btn');
+            const additionalReviews = document.querySelector('.additional-reviews');
+    
+            if (showMoreBtn) {
+                showMoreBtn.addEventListener('click', function() {
+                    if (additionalReviews.style.display === 'none') {
+                        additionalReviews.style.display = 'block';
+                        showMoreBtn.textContent = 'Show Less';
+                        additionalReviews.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    } else {
+                        additionalReviews.style.display = 'none';
+                        showMoreBtn.textContent = 'Show More';
+                        document.querySelector('.reviews').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }
+                });
+            }
+        });
+        </script>
 </html>
+@endsection
