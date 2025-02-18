@@ -10,18 +10,27 @@ class PeminjamanController extends Controller
 {
     public function borrow($id)
     {
-        // Temukan buku berdasarkan ID
-        $buku = Buku::findOrFail($id);
-
-        // Buat record peminjaman baru
+        // Cek ulang jika buku sudah dipinjam oleh user
+        $exists = Peminjaman::where('UserID', auth()->user()->id)
+                    ->where('BukuID', $id)
+                    ->where('StatusPeminjaman', 'borrowed')
+                    ->exists();
+                    
+        if($exists){
+            return response()->json([
+                'success' => false,
+                'message' => 'You have already borrowed this book.'
+            ]);
+        }
+        
+        // Simpan data peminjaman baru
         $peminjaman = new Peminjaman();
-        $peminjaman->UserID = auth()->user()->id; // pastikan user sudah login
-        $peminjaman->BukuID = $buku->id;
+        $peminjaman->UserID = auth()->user()->id;
+        $peminjaman->BukuID = $id;
         $peminjaman->StatusPeminjaman = 'borrowed';
-        $peminjaman->TanggalPeminjaman = now(); // waktu peminjaman saat ini
-        // TanggalPengembalian dibiarkan default ('0000-00-00 00:00:00')
+        $peminjaman->TanggalPeminjaman = now();
         $peminjaman->save();
 
-        // Redirect ke halaman bookshelf dengan pesan sukses
-        return response()->json(['success' => true]);    }
+        return response()->json(['success' => true]);
+    }
 }

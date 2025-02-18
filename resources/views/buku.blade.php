@@ -56,10 +56,16 @@
                             @endforeach
                         </div>
                         <p class="publisher mb-2">{{ $buku->deskripsi }}</p><br>
-                        <form id="borrowForm" action="{{ route('borrow', $buku->id) }}" method="POST">
-                            @csrf
-                            <button type="submit" id="borrowButton" class="btn btn-success">Borrow</button>
-                        </form>
+                        <div class="mt-3">
+                            @if($isBorrowed)
+                                <button type="button" class="btn btn-secondary" disabled>Borrowed</button>
+                            @else
+                                <form id="borrowForm" action="{{ route('borrow', $buku->id) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" id="borrowButton" class="btn btn-success">Borrow</button>
+                                </form>
+                            @endif
+                        </div>
                 
                         <!-- Modal Pop-up -->
                         <div class="modal fade" id="borrowModal" tabindex="-1" aria-labelledby="borrowModalLabel" aria-hidden="true">
@@ -201,41 +207,45 @@
 </body>
     <script>
         document.addEventListener('DOMContentLoaded', function(){
+            // Jika buku belum dipinjam, tambahkan event listener pada form
             const borrowForm = document.getElementById('borrowForm');
-            const borrowButton = document.getElementById('borrowButton');
-            const modalElement = document.getElementById('borrowModal');
-            const borrowModal = new bootstrap.Modal(modalElement, {
-                keyboard: false
-            });
+            if(borrowForm){
+                const borrowButton = document.getElementById('borrowButton');
+                const modalElement = document.getElementById('borrowModal');
+                const borrowModal = new bootstrap.Modal(modalElement, { keyboard: false });
 
-            borrowForm.addEventListener('submit', function(e){
-                e.preventDefault();
-                // Lakukan AJAX request ke route 'borrow'
-                fetch(borrowForm.action, {
-                    method: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({})
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if(data.success){
-                        // Ubah status tombol menjadi 'Borrowed' dan nonaktifkan
-                        borrowButton.textContent = 'Borrowed';
-                        borrowButton.classList.remove('btn-success');
-                        borrowButton.classList.add('btn-secondary');
-                        borrowButton.disabled = true;
-                        // Tampilkan modal
-                        borrowModal.show();
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
+                borrowForm.addEventListener('submit', function(e){
+                    e.preventDefault();
+                    fetch(borrowForm.action, {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({})
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if(data.success){
+                            // Ubah tombol menjadi 'Borrowed', ganti warna dan nonaktifkan
+                            borrowButton.textContent = 'Borrowed';
+                            borrowButton.classList.remove('btn-success');
+                            borrowButton.classList.add('btn-secondary');
+                            borrowButton.disabled = true;
+                            // Tampilkan modal pop-up
+                            borrowModal.show();
+                        } else {
+                            // Jika terjadi error atau buku sudah dipinjam (meski seharusnya tidak terjadi), tampilkan pesan error
+                            alert(data.message || 'An error occurred.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
                 });
-            });
+            }
 
+            // Tombol untuk menuju Bookshelf
             document.getElementById('checkBookshelf').addEventListener('click', function(){
                 window.location.href = "{{ route('bookshelf') }}";
             });

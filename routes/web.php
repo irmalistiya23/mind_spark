@@ -92,6 +92,7 @@ Route::post('/favorite/{action}/{bukuId}', [FavoriteController::class, 'toggleFa
 Route::get('/favorite', [FavoriteController::class, 'favoriteList'])->name('favorite');
 
 //peminjaman
+
 Route::post('/borrow/{id}', [PeminjamanController::class, 'borrow'])->name('borrow');
 
 
