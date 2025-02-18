@@ -5,6 +5,7 @@
 
     <link rel="stylesheet" href="{{ asset('css/buku.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <title>MindSpark</title>
 </head>
 <body>
@@ -55,6 +56,30 @@
                             @endforeach
                         </div>
                         <p class="publisher mb-2">{{ $buku->deskripsi }}</p><br>
+                        <form id="borrowForm" action="{{ route('borrow', $buku->id) }}" method="POST">
+                            @csrf
+                            <button type="submit" id="borrowButton" class="btn btn-success">Borrow</button>
+                        </form>
+                
+                        <!-- Modal Pop-up -->
+                        <div class="modal fade" id="borrowModal" tabindex="-1" aria-labelledby="borrowModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="borrowModalLabel">Book Successfully Borrowed</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                You have successfully borrowed the book.
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" id="checkBookshelf" class="btn btn-primary">Check Bookshelf</button>
+                                <button type="button" id="okButton" class="btn btn-secondary" data-bs-dismiss="modal">Ok</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                                    
                         <h4>Rating</h4>
                     </div>
                     <div class="book-actions mt-4">
@@ -175,6 +200,47 @@
 
 </body>
     <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            const borrowForm = document.getElementById('borrowForm');
+            const borrowButton = document.getElementById('borrowButton');
+            const modalElement = document.getElementById('borrowModal');
+            const borrowModal = new bootstrap.Modal(modalElement, {
+                keyboard: false
+            });
+
+            borrowForm.addEventListener('submit', function(e){
+                e.preventDefault();
+                // Lakukan AJAX request ke route 'borrow'
+                fetch(borrowForm.action, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({})
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if(data.success){
+                        // Ubah status tombol menjadi 'Borrowed' dan nonaktifkan
+                        borrowButton.textContent = 'Borrowed';
+                        borrowButton.classList.remove('btn-success');
+                        borrowButton.classList.add('btn-secondary');
+                        borrowButton.disabled = true;
+                        // Tampilkan modal
+                        borrowModal.show();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            });
+
+            document.getElementById('checkBookshelf').addEventListener('click', function(){
+                window.location.href = "{{ route('bookshelf') }}";
+            });
+        });
+    
         document.addEventListener('DOMContentLoaded', function() {
             const showMoreBtn = document.querySelector('.show-more-btn');
             const additionalReviews = document.querySelector('.additional-reviews');

@@ -1,60 +1,27 @@
 <?php
+
 namespace App\Http\Controllers;
 
-use App\Models\Peminjaman;
-use App\Models\Buku;
 use Illuminate\Http\Request;
+use App\Models\Buku;
+use App\Models\Peminjaman;
 
 class PeminjamanController extends Controller
 {
     public function borrow($id)
     {
+        // Temukan buku berdasarkan ID
         $buku = Buku::findOrFail($id);
-    
-        // Cek apakah buku sudah dipinjam oleh pengguna lain dan belum dikembalikan
-        $existingBorrow = Peminjaman::where('BukuID', $buku->id)
-                                    ->whereNull('TanggalPengembalian')
-                                    ->first();
-    
-        if (!$existingBorrow) {
-            // Jika buku belum dipinjam atau sudah dikembalikan, lakukan peminjaman
-            Peminjaman::create([
-                'UserID' => auth()->id(),
-                'BukuID' => $buku->id,
-                'TanggalPeminjaman' => now(),
-                'StatusPeminjaman' => 'borrowed',
-            ]);
-        }
-    
-        return redirect()->route('bookshelf');  // Redirect ke bookshelf setelah borrow
-    }
-    
 
-    public function return($id)
-    {
-        $buku = Buku::findOrFail($id);
-        
-        // Update status peminjaman menjadi dikembalikan
-        $peminjaman = Peminjaman::where('BukuID', $buku->id)
-            ->where('UserID', auth()->id())
-            ->whereNull('TanggalPengembalian')
-            ->first();
+        // Buat record peminjaman baru
+        $peminjaman = new Peminjaman();
+        $peminjaman->UserID = auth()->user()->id; // pastikan user sudah login
+        $peminjaman->BukuID = $buku->id;
+        $peminjaman->StatusPeminjaman = 'borrowed';
+        $peminjaman->TanggalPeminjaman = now(); // waktu peminjaman saat ini
+        // TanggalPengembalian dibiarkan default ('0000-00-00 00:00:00')
+        $peminjaman->save();
 
-        if ($peminjaman) {
-            $peminjaman->TanggalPengembalian = now();
-            $peminjaman->StatusPeminjaman = 'returned';
-            $peminjaman->save();
-            
-            $buku->status = 'available'; // Menandakan buku kembali tersedia
-            $buku->save();
-        }
-
-        return redirect()->route('bookshelf');  // Redirect ke bookshelf setelah return
-    }
-    
-    public function bookshelf()
-    {
-        $bukus = Buku::all();  // Ambil semua buku dari tabel buku
-        return view('bookshelf', compact('bukus'));
-    }
+        // Redirect ke halaman bookshelf dengan pesan sukses
+        return response()->json(['success' => true]);    }
 }
