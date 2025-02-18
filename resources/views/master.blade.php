@@ -16,11 +16,6 @@
             <i class="bi bi-image"></i> Logo
         </div>
         <div class="text-center">
-            <img src="{{ Auth::user()->foto_url }}"
-                alt="User Avatar"
-                class="user-avatar img-fluid rounded-circle">
-        </div>
-        <div class="text-center">
             <strong>{{ Auth::user()->nama }}</strong>
         </div>
         <hr>
@@ -33,7 +28,7 @@
         <a href="{{ route('favorite') }}" class="d-block {{ request()->is('favorite') ? 'active' : '' }}" class="d-block">
             <i class="bi bi-star icon-custom"></i> Favorites
         </a>
-        <a href="{{ route('chatcs') }}" class="d-block {{ request()->is('chatcs') ? 'active' : '' }}" class="d-block">
+        <a href="{{ route('chatify') }}" class="d-block {{ request()->is('chatcs') ? 'active' : '' }}" class="d-block">
             <i class="bi bi-chat icon-custom"></i> Chat CS
         </a>
     </div>

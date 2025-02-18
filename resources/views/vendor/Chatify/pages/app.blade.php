@@ -35,7 +35,17 @@
                {!! view('Chatify::layouts.listItem', ['get' => 'saved']) !!}
                {{-- Contact --}}
                <p class="messenger-title"><span>All Messages</span></p>
-               <div class="listOfContacts" style="width: 100%;height: calc(100% - 272px);position: relative;"></div>
+                <div class="listOfContacts" style="width: 100%;height: calc(100% - 272px);position: relative;">
+                    {{-- Admin selalu ditampilkan di daftar kontak --}}
+                    @php
+                        $admin = \App\Models\User::where('role', 'admin')->first();
+                    @endphp
+                    @if($admin)
+                        <div class="chatify-d-flex contact-item" data-contact="{{ $admin->id }}">
+                        <p>{{ $admin->name }}</p>
+                        </div>
+                    @endif
+                </div>
            </div>
              {{-- ---------------- [ Search Tab ] ---------------- --}}
            <div class="messenger-tab search-tab app-scroll" data-view="search">

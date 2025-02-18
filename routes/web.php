@@ -9,6 +9,8 @@ use App\Http\Controllers\BukuController;
 use App\Http\Controllers\UlasanController;
 use App\Http\Controllers\ManageController;
 use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\ChatController;
+
 
 
 
@@ -42,7 +44,6 @@ Route::get('/account', [BlogController::class, 'account'])->name('account');
 Route::put('/account/update', [UserController::class, 'update'])->name('account.update')->middleware('auth');
 
 Route::get('/favorite', [BlogController::class, 'favorite'])->name('favorite');
-Route::get('/chatcs', [BlogController::class, 'chatcs'])->name('chatcs');
 
 //ngatur login register logout
 Route::get('/', [BlogController::class, 'welcome'])->name('welcome');
@@ -83,6 +84,9 @@ Route::post('/favorite/{action}/{bukuId}', [FavoriteController::class, 'toggleFa
 
 // Route untuk melihat daftar buku favorit
 Route::get('/favorite', [FavoriteController::class, 'favoriteList'])->name('favorite');
+
+// route admin chatify
+Route::get('/chatify', [ChatController::class, 'openChat'])->name('chatify');
 
 
 
