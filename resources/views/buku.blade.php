@@ -139,7 +139,7 @@
                                 <!-- Container untuk review tambahan -->
                                 <div class="additional-reviews" style="display: none;">
                                     @foreach($buku->ulasans->skip(1) as $ulasan)
-                                        <div class="review-item mb-4">
+                                        <div class="review-item mb-4 border-bottom pb-3">
                                             <div class="review-header d-flex justify-content-between align-items-center">
                                                 <div class="user-info">
                                                     <strong>{{ $ulasan->user->name }}</strong>
@@ -153,9 +153,28 @@
                                                         @endfor
                                                     </div>
                                                 </div>
-                                                <small class="text-muted">
-                                                    {{ $ulasan->created_at->diffForHumans() }}
-                                                </small>
+                                                <div class="d-flex align-items-center">
+                                                    <small class="text-muted me-3">
+                                                        {{ $ulasan->created_at->diffForHumans() }}
+                                                    </small>
+                                                    @if(auth()->check() && auth()->id() == $ulasan->UserID)
+                                                        <div class="btn-group">
+                                                            <button type="button" class="btn btn-sm" 
+                                                                    data-bs-toggle="modal" 
+                                                                    data-bs-target="#editReviewModal{{ $ulasan->id }}">
+                                                                <i class="fas fa-edit"></i>
+                                                            </button>
+                                                            <form action="{{ route('ulasan.destroy', $ulasan->id) }}" method="POST" class="d-inline">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="btn btn-sm" 
+                                                                        onclick="return confirm('Are you sure you want to delete this review?')">
+                                                                    <i class="fas fa-trash"></i>
+                                                                </button>
+                                                            </form>
+                                                        </div>
+                                                    @endif
+                                                </div>
                                             </div>
                                             <div class="review-content mt-2">
                                                 {{ $ulasan->Ulasan }}
@@ -210,7 +229,7 @@
         </div>
     </div>
 
-</body>
+    <!-- Buat bikin show more dan less -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const showMoreBtn = document.querySelector('.show-more-btn');
@@ -230,6 +249,72 @@
                 });
             }
         });
-        </script>
+    </script>
+
+    <!-- Edit Review Modals -->
+    @foreach($buku->ulasans as $ulasan)
+        <div class="modal fade" id="editReviewModal{{ $ulasan->id }}" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit Review</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="{{ route('ulasan.update', $ulasan->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="modal-body">
+                            <!-- Rating Stars -->
+                            <div class="mb-3">
+                                <label class="form-label">Rating:</label>
+                                <div class="star-rating">
+                                    @for($i = 5; $i >= 1; $i--)
+                                        <input type="radio" 
+                                               id="star{{ $ulasan->id }}_{{ $i }}" 
+                                               name="rating" 
+                                               value="{{ $i }}" 
+                                               {{ $ulasan->Rating == $i ? 'checked' : '' }}
+                                               required>
+                                        <label for="star{{ $ulasan->id }}_{{ $i }}">
+                                            <i class="fas fa-star"></i>
+                                        </label>
+                                    @endfor
+                                </div>
+                            </div>
+
+                            <!-- Review Text -->
+                            <div class="mb-3">
+                                <label for="ulasan{{ $ulasan->id }}" class="form-label">Your Review:</label>
+                                <textarea class="form-control" 
+                                          id="ulasan{{ $ulasan->id }}" 
+                                          name="ulasan" 
+                                          rows="3" 
+                                          required>{{ $ulasan->Ulasan }}</textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endforeach
+
+    <!-- Add JavaScript for modal -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Reset form when modal is closed
+        const editModals = document.querySelectorAll('.modal');
+        editModals.forEach(modal => {
+            modal.addEventListener('hidden.bs.modal', function() {
+                const form = this.querySelector('form');
+                if (form) form.reset();
+            });
+        });
+    });
+    </script>
+</body>
 </html>
 @endsection
