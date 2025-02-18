@@ -5,6 +5,10 @@ body{
     font-style: normal;
 }
 
+main{
+    color: black;
+}
+
 .category-title {
     margin-bottom: 15px;
     color: #333;
@@ -184,6 +188,7 @@ body{
         white-space: nowrap;
     }
 }
+
 
 /* Book Card Styles */
 .book-card {

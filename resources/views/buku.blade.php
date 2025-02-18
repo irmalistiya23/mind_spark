@@ -1,12 +1,12 @@
 @extends('master')
 @section('konten')
-<head>
+<!DOCTYPE html>
+<html lang="en">
+
     <link rel="stylesheet" href="{{ asset('css/buku.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <title>MindSpark</title>
 </head>
-<style>
-
-</style>
 <body>
     <div class="container mt-4">
         <div class="row mb-4 align-items-center">
@@ -27,6 +27,22 @@
         </div>
 
         <div class="row">
+            <div class="col-md-5">
+                <div class="book-cover-container">
+                    <form action="{{ route('favorites.toggle', ['action' => auth()->user()->favorites->contains('BukuID', $buku->id) ? 'remove' : 'add', 'bukuId' => $buku->id]) }}" method="POST" class="favorite-btn">
+                        @csrf
+                        <button type="submit" class="btn border-0 bg-transparent">
+                            <i class="bi bi-star{{ auth()->user()->favorites->contains('BukuID', $buku->id) ? '-fill' : '' }} fs-3 text-warning" aria-hidden="true"></i>
+                        </button>
+                    </form>
+                
+                    @if($buku->CoverBuku)
+                        <img src="{{ asset('storage/cover_buku/' . $buku->CoverBuku) }}" alt="{{ $buku->NamaBuku }}" class="img-fluid">
+                    @else
+                        <div class="no-image p-5 bg-light text-center rounded">No Image Available</div>
+                    @endif
+                </div>
+            </div>
             <!-- Detail Buku (60%) -->
             <div class="col-md-7">
                 <div class="book-details">
@@ -41,19 +57,8 @@
                         <p class="publisher mb-2">{{ $buku->deskripsi }}</p><br>
                         <h4>Rating</h4>
                     </div>
-
-                    <!-- Tombol Borrow / Return -->
                     <div class="book-actions mt-4">
-                        <form action="{{ route('borrowBook', $buku->id) }}" method="POST" style="display: inline;">
-                            @csrf
-                            @if ($buku->peminjamanAktif)
-                                <button type="submit" class="btn btn-warning">Kembalikan Buku</button>
-                            @else
-                                <button type="submit" class="btn btn-success">Pinjam Buku</button>
-                            @endif
-                        </form>
-                    
-                    </div>
+              </div>
 
 
                     <!-- Rating -->
@@ -137,25 +142,34 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Cover Buku (40%) -->
-            <div class="col-md-5">
-                <div class="book-cover-container position-relative">
-                    <form action="{{ route('favorites.toggle', ['action' => auth()->user()->favorites->contains('BukuID', $buku->id) ? 'remove' : 'add', 'bukuId' => $buku->id]) }}" method="POST" class="position-absolute top-0 end-0 p-2 z-3">
-                        @csrf
-                        <button type="submit" class="btn border-0 bg-transparent">
-                            <i class="bi bi-star{{ auth()->user()->favorites->contains('BukuID', $buku->id) ? '-fill' : '' }} fs-3 text-warning" aria-hidden="true"></i>
-                        </button>
-                    </form>
-                    @if($buku->CoverBuku)
-                        <img src="{{ asset('storage/cover_buku/' . $buku->CoverBuku) }}" alt="{{ $buku->NamaBuku }}" class="img-fluid rounded shadow">
-                    @else
-                        <div class="no-image p-5 bg-light text-center rounded">No Image Available</div>
-                    @endif
-                </div>
-            </div>
         </div>
+
+            <!-- Book List -->
+        <h3 class="mt-5">Other Books</h3>
+        <div class="row mt-3">
+            @foreach($otherBooks as $buku)
+                <div class="col-6 col-md-3 mb-4">
+                    <div class="other-book-item">
+                        <div class="other-book-cover-container">
+                            <a href="{{ route('buku.show', $buku->id) }}">
+                                <img src="{{ asset('storage/cover_buku/' . $buku->CoverBuku) }}" 
+                                    alt="{{ $buku->NamaBuku }}" 
+                                    class="img-fluid rounded shadow">
+                            </a>
+                        </div>
+                        <div class="book-info">
+                            <h5 class="book-title">{{ $buku->NamaBuku }}</h5>
+                            <p class="book-author">{{ $buku->penulis }}</p>    
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+
+
     </div>
+
+    
 
 
 

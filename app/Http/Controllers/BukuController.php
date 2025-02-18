@@ -16,7 +16,11 @@ class BukuController extends Controller
         
         // Hitung rata-rata rating
         $averageRating = $buku->ulasans->avg('Rating') ?? 0;
-        
-        return view('buku', compact('buku', 'averageRating'));
+
+         // Ambil buku lain kecuali buku yang sedang ditampilkan
+         $otherBooks = Buku::where('id', '!=', $id)->get();
+         
+        return view('buku', compact('buku', 'averageRating', 'otherBooks')); 
     }
+    
 }

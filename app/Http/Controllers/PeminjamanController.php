@@ -1,75 +1,60 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Buku;
 use App\Models\Peminjaman;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Buku;
+use Illuminate\Http\Request;
 
 class PeminjamanController extends Controller
 {
-
     public function borrow($id)
     {
         $buku = Buku::findOrFail($id);
     
-        // Cek apakah buku sedang dipinjam
-        $existingLoan = Peminjaman::where('BukuID', $id)
-            ->where('UserID', Auth::id())
-            ->where('StatusPeminjaman', 'dipinjam')
-            ->first();
+        // Cek apakah buku sudah dipinjam oleh pengguna lain dan belum dikembalikan
+        $existingBorrow = Peminjaman::where('BukuID', $buku->id)
+                                    ->whereNull('TanggalPengembalian')
+                                    ->first();
     
-        if ($existingLoan) {
-            return back()->with('error', 'Buku ini sedang Anda pinjam.');
+        if (!$existingBorrow) {
+            // Jika buku belum dipinjam atau sudah dikembalikan, lakukan peminjaman
+            Peminjaman::create([
+                'UserID' => auth()->id(),
+                'BukuID' => $buku->id,
+                'TanggalPeminjaman' => now(),
+                'StatusPeminjaman' => 'borrowed',
+            ]);
         }
     
-        // Buat entri peminjaman baru
-        Peminjaman::create([
-            'UserID' => Auth::id(),
-            'BukuID' => $buku->id,
-            'StatusPeminjaman' => 'dipinjam',
-        ]);
-    
-        return redirect()->route('bookshelf')->with('success', 'Buku berhasil dipinjam!');
+        return redirect()->route('bookshelf');  // Redirect ke bookshelf setelah borrow
     }
     
+
     public function return($id)
     {
-        $loan = Peminjaman::where('BukuID', $id)
-            ->where('UserID', Auth::id())
-            ->where('StatusPeminjaman', 'dipinjam')
-            ->firstOrFail();
-    
-        // Perbarui status pengembalian
-        $loan->update([
-            'TanggalPengembalian' => now(),
-            'StatusPeminjaman' => 'dikembalikan',
-        ]);
-    
-        return redirect()->route('bookshelf')->with('success', 'Buku berhasil dikembalikan!');
-    }
-    
-
-    public function index()
-    {
-        // Ambil buku yang sedang dipinjam oleh user
-        $booksOnLoan = Peminjaman::where('UserID', Auth::id())
-                                ->where('StatusPeminjaman', 'dipinjam')
-                                ->with('buku') // Ambil data buku terkait
-                                ->get();
+        $buku = Buku::findOrFail($id);
         
-        // Ambil riwayat buku yang sudah dikembalikan
-        $returnedBooks = Peminjaman::where('UserID', Auth::id())
-                                ->where('StatusPeminjaman', 'dikembalikan')
-                                ->with('buku')
-                                ->get();
-    
-        // Kirim data ke view
-        return view('bookshelf', compact('booksOnLoan', 'returnedBooks'));
+        // Update status peminjaman menjadi dikembalikan
+        $peminjaman = Peminjaman::where('BukuID', $buku->id)
+            ->where('UserID', auth()->id())
+            ->whereNull('TanggalPengembalian')
+            ->first();
+
+        if ($peminjaman) {
+            $peminjaman->TanggalPengembalian = now();
+            $peminjaman->StatusPeminjaman = 'returned';
+            $peminjaman->save();
+            
+            $buku->status = 'available'; // Menandakan buku kembali tersedia
+            $buku->save();
+        }
+
+        return redirect()->route('bookshelf');  // Redirect ke bookshelf setelah return
     }
     
-
-
-    
+    public function bookshelf()
+    {
+        $bukus = Buku::all();  // Ambil semua buku dari tabel buku
+        return view('bookshelf', compact('bukus'));
+    }
 }
