@@ -12,9 +12,30 @@ class ManageController extends Controller
 {
     public function index()
     {
-        $users = User::all();
-        $books = Buku::with('kategoris')->get();
-        return view('admin.manage', compact('users', 'books'));
+        return redirect()->route('manage.books');
+    }
+
+    public function books()
+    {
+        try {
+            $books = Buku::with('kategoris')->get();
+            $categories = Kategori::all();
+            return view('managebook', compact('books', 'categories'));
+        } catch (\Exception $e) {
+            // Debug: Tampilkan error
+            dd($e->getMessage());
+        }
+    }
+
+    public function users()
+    {
+        try {
+            $users = User::all();
+            return view('manageuser', compact('users'));
+        } catch (\Exception $e) {
+            // Debug: Tampilkan error
+            dd($e->getMessage());
+        }
     }
 
     // User Management
