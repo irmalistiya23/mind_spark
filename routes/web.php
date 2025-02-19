@@ -94,6 +94,9 @@ Route::get('/favorite', [FavoriteController::class, 'favoriteList'])->name('favo
 //peminjaman
 
 Route::post('/borrow/{id}', [PeminjamanController::class, 'borrow'])->name('borrow');
+Route::get('/loaning', [PeminjamanController::class, 'index'])->name('loaning');
+Route::put('/loaning/{id}', [PeminjamanController::class, 'update'])->name('loaning.update');
+Route::delete('/loaning/{id}', [PeminjamanController::class, 'destroy'])->name('loaning.destroy');
 
 
 ?>
