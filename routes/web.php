@@ -9,7 +9,6 @@ use App\Http\Controllers\BukuController;
 use App\Http\Controllers\UlasanController;
 use App\Http\Controllers\ManageController;
 use App\Http\Controllers\FavoriteController;
-use App\Http\Controllers\ChatController;
 
 
 
@@ -86,7 +85,6 @@ Route::post('/favorite/{action}/{bukuId}', [FavoriteController::class, 'toggleFa
 Route::get('/favorite', [FavoriteController::class, 'favoriteList'])->name('favorite');
 
 // route admin chatify
-Route::get('/chatify', [ChatController::class, 'openChat'])->name('chatify');
 
 
 

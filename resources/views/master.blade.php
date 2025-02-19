@@ -28,9 +28,10 @@
         <a href="{{ route('favorite') }}" class="d-block {{ request()->is('favorite') ? 'active' : '' }}" class="d-block">
             <i class="bi bi-star icon-custom"></i> Favorites
         </a>
-        <a href="{{ route('chatify') }}" class="d-block {{ request()->is('chatcs') ? 'active' : '' }}" class="d-block">
+        <a href="/chatify" class="d-block {{ request()->is('chatify') ? 'active' : '' }}">
             <i class="bi bi-chat icon-custom"></i> Chat CS
         </a>
+
     </div>
 
     <main>
