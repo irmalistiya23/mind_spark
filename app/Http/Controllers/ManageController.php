@@ -14,7 +14,7 @@ class ManageController extends Controller
     {
         $users = User::all();
         $books = Buku::with('kategoris')->get();
-        return view('manage', compact('users', 'books'));
+        return view('admin.manage', compact('users', 'books'));
     }
 
     // User Management

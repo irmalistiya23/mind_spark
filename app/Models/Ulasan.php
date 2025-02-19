@@ -13,19 +13,19 @@ class Ulasan extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'UserID',
         'BukuID',
+        'UserID',
         'Rating',
         'Ulasan'
     ];
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'UserID', 'id');
+        return $this->belongsTo(User::class, 'UserID');
     }
 
     public function buku()
     {
-        return $this->belongsTo(Buku::class, 'BukuID', 'id');
+        return $this->belongsTo(Buku::class, 'BukuID');
     }
 }

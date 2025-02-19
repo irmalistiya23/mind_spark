@@ -15,25 +15,6 @@
 </head>
 <body>
     <div class="container mt-4">
-        <div class="row mb-4 align-items-center">
-            <!-- Search Bar -->
-            <div class="col-md-4 text-end">
-                <div class="search-container">
-                    <form action="{{ $action ?? request()->url() }}" method="GET" class="search-form">
-                        @foreach(request()->except(['search', 'page']) as $key => $value)
-                            <input type="hidden" name="{{ $key }}" value="{{ $value }}">
-                        @endforeach
-                        <div class="search-wrapper d-flex">
-                            <input type="text" name="search" class="form-control me-2" placeholder="What book are you looking for...." value="{{ request('search') }}">
-                            <button type="submit" class="btn btn-primary">
-                                Search
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
         <!-- Main Book Content Row -->
         <div class="row">
             <!-- Cover Buku -->

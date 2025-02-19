@@ -63,6 +63,8 @@ Route::get('/buku/{id}', [BukuController::class, 'show'])->name('buku.show');
 // Route Ulasan
 Route::middleware(['auth'])->group(function () {
     Route::post('/ulasan', [UlasanController::class, 'store'])->name('ulasan.store');
+    Route::put('/ulasan/{id}', [UlasanController::class, 'update'])->name('ulasan.update');
+    Route::delete('/ulasan/{id}', [UlasanController::class, 'destroy'])->name('ulasan.destroy');
 });
 
 //Route Manage User oleh Admin
@@ -75,8 +77,6 @@ Route::prefix('manage')->group(function () {
     Route::delete('/users/{id}', [ManageController::class, 'destroy'])->name('manage.destroy');
     Route::delete('/books/{id}', [ManageController::class, 'destroyBook'])->name('manage.books.destroy');
 });
-
-//favorit
 
 // Route untuk menambah atau menghapus buku dari favorit
 Route::post('/favorite/{action}/{bukuId}', [FavoriteController::class, 'toggleFavorite'])->name('favorites.toggle');
