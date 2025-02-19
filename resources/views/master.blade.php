@@ -25,6 +25,8 @@
         <a href="{{ route('account') }}" class="d-block {{ request()->is('account') ? 'active' : '' }}">
             <i class="bi bi-person icon-custom"></i> Account
         </a>
+
+        @if(Auth::user()->role == 'user')
         <a href="{{ route('kategori') }}" class="d-block {{ request()->is('kategori') ? 'active' : '' }}">
             <i class="bi bi-house icon-custom"></i> Home
         </a>
@@ -37,6 +39,38 @@
         <a href="{{ route('chatcs') }}" class="d-block {{ request()->is('chatcs') ? 'active' : '' }}">
             <i class="bi bi-chat icon-custom"></i> Chat CS
         </a>
+
+
+        @elseif(Auth::user()->role == 'administrator' || Auth::user()->role == 'petugas')
+        <hr>
+        <div class="text-center">
+            <p>Manage</p>
+        </div>
+        <hr>
+        <a href="{{ route('chatcs') }}" class="d-block {{ request()->is('chatcs') ? 'active' : '' }}">
+            <i class="bi bi-chat icon-custom"></i> Loaning
+        </a>
+        <a href="{{ route('favorite') }}" class="d-block {{ request()->is('favorite') ? 'active' : '' }}">
+            <i class="bi bi-star icon-custom"></i> Books
+        </a>
+        <a href="{{ route('chatcs') }}" class="d-block {{ request()->is('chatcs') ? 'active' : '' }}">
+            <i class="bi bi-chat icon-custom"></i> Categories
+        </a>
+        <a href="{{ route('chatcs') }}" class="d-block {{ request()->is('chatcs') ? 'active' : '' }}">
+            <i class="bi bi-chat icon-custom"></i> Book Categories
+        </a>
+
+            @if(Auth::user()->role == 'administrator')
+            <a href="{{ route('favorite') }}" class="d-block {{ request()->is('favorite') ? 'active' : '' }}">
+                <i class="bi bi-star icon-custom"></i> Officer
+            </a>
+            <a href="{{ route('chatcs') }}" class="d-block {{ request()->is('chatcs') ? 'active' : '' }}">
+                <i class="bi bi-chat icon-custom"></i> Users
+            </a>
+            @endif
+
+        @endif
+
         <div class="logout-section">
             <a href="#" class="d-block logout-link" data-bs-toggle="modal" data-bs-target="#logoutModal">
                 <i class="bi bi-box-arrow-right icon-custom"></i> Logout

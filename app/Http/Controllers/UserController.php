@@ -9,6 +9,19 @@ use App\Models\User;
 
 class UserController extends Controller
 {
+    public function dashboard()
+    {
+        $role = Auth::user()->role;
+
+        if ($role == 'administrator') {
+            return view('admin.dashboard');
+        } elseif ($role == 'petugas') {
+            return view('petugas.dashboard');
+        } else {
+            return view('user.dashboard');
+        }
+    }
+
     public function update(Request $request)
     {
         $user = Auth::user();
