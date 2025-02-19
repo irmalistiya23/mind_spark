@@ -1,4 +1,4 @@
-@extends('master')
+<!-- @extends('master') -->
 @section('konten')
 <!DOCTYPE html>
 <html>
