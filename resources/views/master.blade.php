@@ -47,7 +47,7 @@
             <p>Manage</p>
         </div>
         <hr>
-        <a href="{{ route('chatcs') }}" class="d-block {{ request()->is('chatcs') ? 'active' : '' }}">
+        <a href="{{ route('loaning') }}" class="d-block {{ request()->is('loaning') ? 'active' : '' }}">
             <i class="bi bi-chat icon-custom"></i> Loaning
         </a>
         <a href="{{ route('favorite') }}" class="d-block {{ request()->is('favorite') ? 'active' : '' }}">
@@ -61,9 +61,6 @@
         </a>
 
             @if(Auth::user()->role == 'administrator')
-            <a href="{{ route('favorite') }}" class="d-block {{ request()->is('favorite') ? 'active' : '' }}">
-                <i class="bi bi-star icon-custom"></i> Officer
-            </a>
             <a href="{{ route('chatcs') }}" class="d-block {{ request()->is('chatcs') ? 'active' : '' }}">
                 <i class="bi bi-chat icon-custom"></i> Users
             </a>

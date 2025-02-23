@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Buku;
 use App\Models\Peminjaman;
 
 class PeminjamanController extends Controller
@@ -15,14 +14,14 @@ class PeminjamanController extends Controller
                     ->where('BukuID', $id)
                     ->where('StatusPeminjaman', 'borrowed')
                     ->exists();
-                    
-        if($exists){
+
+        if ($exists) {
             return response()->json([
                 'success' => false,
                 'message' => 'You have already borrowed this book.'
             ]);
         }
-        
+
         // Simpan data peminjaman baru
         $peminjaman = new Peminjaman();
         $peminjaman->UserID = auth()->user()->id;
@@ -33,4 +32,41 @@ class PeminjamanController extends Controller
 
         return response()->json(['success' => true]);
     }
+
+    public function update(Request $request, $id)
+    {
+        // Hanya petugas yang dapat mengubah status
+        if (auth()->user()->role !== 'petugas') {
+            return response()->json(['success' => false, 'message' => 'Unauthorized.']);
+        }
+
+        $request->validate([
+            'StatusPeminjaman' => 'required|in:borrowed,returned'
+        ]);
+
+        $peminjaman = Peminjaman::findOrFail($id);
+        $peminjaman->StatusPeminjaman = $request->StatusPeminjaman;
+
+        // Jika status dikembalikan, catat waktu pengembalian
+        if ($request->StatusPeminjaman === 'returned') {
+            $peminjaman->TanggalPengembalian = now();
+        }
+
+        $peminjaman->save();
+
+        return response()->json(['success' => true, 'message' => 'Status updated successfully.']);
+    }
+
+    public function showForm($id)
+    {
+        $peminjaman = Peminjaman::findOrFail($id);
+
+        return view('peminjaman.edit', compact('peminjaman'));
+    }
+    public function index()
+{
+    $peminjaman = Peminjaman::with(['user', 'buku'])->get();
+    return view('loaning', compact('peminjaman'));
+}
+
 }
