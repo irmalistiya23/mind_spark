@@ -301,3 +301,131 @@ main{
     color: #555;
     line-height: 1.6;
 } 
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .book-cover, .no-image {
+        height: 250px;
+    }
+}
+
+@media (max-width: 768px) {
+    .book-cover, .no-image {
+        height: 220px;
+    }
+}
+
+.category-list .btn {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.book-rating {
+    font-size: 1.2rem;
+}
+
+.book-rating .stars {
+    display: inline-block;
+}
+
+.book-rating .rating-text {
+    font-size: 1rem;
+    vertical-align: middle;
+}
+
+.review-item {
+    background-color: #f8f9fa;
+    transition: transform 0.2s;
+}
+
+.review-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.review-item .rating {
+    font-size: 0.9rem;
+    margin-top: 4px;
+}
+
+.review-content {
+    color: #555;
+    line-height: 1.6;
+} 
+
+.rating-stars {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+}
+
+.star-rating input[type="radio"] {
+    display: none;
+}
+
+.star-label {
+    cursor: pointer;
+    padding: 0 2px;
+    font-size: 24px;
+    color: #ddd;
+    transition: color 0.2s;
+}
+
+.star-label:hover,
+.star-label:hover ~ .star-label,
+.star-rating input[type="radio"]:checked ~ .star-label {
+    color: #ffc107;
+}
+
+.star-rating input[type="radio"]:checked + .star-label {
+    color: #ffc107;
+}
+
+/* Styling untuk bintang yang sudah ada */
+.stars .fas.fa-star,
+.stars .fas.fa-star-half-alt,
+.stars .far.fa-star {
+    font-size: 20px;
+    margin-right: 2px;
+}
+
+/* Hover effect untuk bintang edit */
+.modal .star-rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+}
+
+.modal .star-rating input[type="radio"] {
+    display: none;
+}
+
+.modal .star-rating label {
+    cursor: pointer;
+    padding: 0 2px;
+    font-size: 24px;
+    color: #ddd;
+}
+
+.modal .star-rating label:hover,
+.modal .star-rating label:hover ~ label,
+.modal .star-rating input[type="radio"]:checked ~ label {
+    color: #ffc107;
+}
+
+.main-container {
+    min-height: 100vh;
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+
+.content-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+}
