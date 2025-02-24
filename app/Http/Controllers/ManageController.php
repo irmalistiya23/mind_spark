@@ -17,25 +17,14 @@ class ManageController extends Controller
 
     public function books()
     {
-        try {
-            $books = Buku::with('kategoris')->get();
-            $categories = Kategori::all();
-            return view('managebook', compact('books', 'categories'));
-        } catch (\Exception $e) {
-            // Debug: Tampilkan error
-            dd($e->getMessage());
-        }
+        $books = Buku::all();
+        return view('managebook', compact('books'));
     }
 
     public function users()
     {
-        try {
-            $users = User::all();
-            return view('manageuser', compact('users'));
-        } catch (\Exception $e) {
-            // Debug: Tampilkan error
-            dd($e->getMessage());
-        }
+        $users = User::all();
+        return view('manageuser', compact('users'));
     }
 
     // User Management

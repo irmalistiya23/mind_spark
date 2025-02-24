@@ -68,13 +68,15 @@ Route::middleware(['auth'])->group(function () {
 });
 
 //Route Manage User oleh Admin
-Route::prefix('manage')->group(function () {
+Route::middleware(['auth'])->prefix('manage')->group(function () {
     Route::get('/', [ManageController::class, 'index'])->name('manage');
-    Route::get('/books', [ManageController::class, 'books'])->name('managebooks');
-    Route::get('/users', [ManageController::class, 'users'])->name('manageusers');
+    
+    // User management routes
+    Route::get('/users', [ManageController::class, 'users'])->name('manageuser');
     Route::delete('/users/{id}', [ManageController::class, 'destroy'])->name('manage.destroy');
     
-    // Book management routes biar bisa edit dan hapus buku
+    // Book management routes
+    Route::get('/books', [ManageController::class, 'books'])->name('managebook');
     Route::get('/books/create', [ManageController::class, 'create'])->name('manage.books.create');
     Route::post('/books', [ManageController::class, 'store'])->name('manage.books.store');
     Route::get('/books/{id}/edit', [ManageController::class, 'edit'])->name('manage.books.edit');
