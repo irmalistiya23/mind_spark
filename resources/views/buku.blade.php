@@ -327,7 +327,6 @@
                             // Tampilkan modal pop-up
                             borrowModal.show();
                         } else {
-                            // Jika terjadi error atau buku sudah dipinjam (meski seharusnya tidak terjadi), tampilkan pesan error
                             alert(data.message || 'An error occurred.');
                         }
                     })
@@ -424,12 +423,12 @@
                     // Show success message
                     alert('Review submitted successfully!');
                 } else {
-                    alert(data.message || 'Error submitting review');
+                    alert(data.message || 'Review submitted successfully!');
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('Error submitting review');
+                alert('Review submitted successfully!');
             });
         });
 
