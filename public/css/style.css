@@ -429,3 +429,71 @@ main{
     padding: 20px;
     border: 1px solid #e0e0e0;
 }
+
+/* Styling untuk container review */
+.review-item {
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+/* Styling untuk header review */
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* Styling untuk action buttons container */
+.action-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Styling untuk icon buttons */
+.action-btn {
+    background: transparent;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+}
+
+/* Styling khusus untuk edit button */
+.edit-btn {
+    color: #0d6efd;
+}
+
+.edit-btn:hover {
+    background-color: rgba(13, 110, 253, 0.1);
+    transform: scale(1.1);
+}
+
+/* Styling khusus untuk delete button */
+.delete-btn {
+    color: #dc3545;
+}
+
+.delete-btn:hover {
+    background-color: rgba(220, 53, 69, 0.1);
+    transform: scale(1.1);
+}
+
+/* Styling untuk icon size */
+.action-btn i {
+    font-size: 16px;
+}
+
+/* Styling untuk timestamp */
+.review-timestamp {
+    color: #6c757d;
+    font-size: 14px;
+    margin-left: 15px;
+}

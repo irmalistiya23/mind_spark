@@ -87,4 +87,47 @@ main{
     .rating-stars input:checked ~ label {
         color: #ffc107;
     }
+
+/* Styling untuk container action buttons */
+.review-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Styling untuk buttons */
+.action-btn {
+    background: none;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    display: flex;
+    align-items: center;
+}
+
+/* Hover effect untuk buttons */
+.action-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Styling untuk icons */
+.action-btn i {
+    font-size: 16px;
+}
+
+.edit-icon {
+    color: #007bff;
+}
+
+.delete-icon {
+    color: #dc3545;
+}
+
+/* Styling untuk timestamp */
+.review-timestamp {
+    color: #6c757d;
+    font-size: 0.875rem;
+    margin-left: 12px;
+}
     

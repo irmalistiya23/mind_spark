@@ -118,6 +118,8 @@
                                                 @endfor
                                             </div>
                                         </div>
+                                        
+                                        <!--biar akunnya bisa edit dan hapus ulasan-->
                                         <div class="d-flex align-items-center">
                                             @if(auth()->id() === $buku->ulasans->first()->user->id)
                                                 <button class="btn btn-sm btn-link text-primary me-2" 
@@ -156,22 +158,24 @@
                                                         @endfor
                                                     </div>
                                                 </div>
-                                                <div class="d-flex align-items-center">
+                                                <div class="d-flex align-items-center gap-2">
                                                     @if(auth()->id() === $ulasan->user->id)
-                                                        <button class="btn btn-sm btn-link text-primary me-2" 
-                                                                data-bs-toggle="modal" 
-                                                                data-bs-target="#editReviewModal{{ $ulasan->id }}">
-                                                            <i class="fas fa-edit"></i>
-                                                        </button>
-                                                        <form action="{{ route('ulasan.destroy', $ulasan->id) }}" 
-                                                              method="POST" 
-                                                              class="d-inline delete-review-form">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="btn btn-sm btn-link text-danger">
-                                                                <i class="fas fa-trash"></i>
+                                                        <div class="d-flex gap-2">
+                                                            <button class="btn btn-sm p-0" 
+                                                                    data-bs-toggle="modal" 
+                                                                    data-bs-target="#editReviewModal{{ $ulasan->id }}">
+                                                                <i class="fas fa-edit text-primary"></i>
                                                             </button>
-                                                        </form>
+                                                            <form action="{{ route('ulasan.destroy', $ulasan->id) }}" 
+                                                                  method="POST" 
+                                                                  class="d-inline delete-review-form m-0">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="btn btn-sm p-0">
+                                                                    <i class="fas fa-trash text-danger"></i>
+                                                                </button>
+                                                            </form>
+                                                        </div>
                                                     @endif
                                                     <small class="text-muted ms-2">{{ $ulasan->created_at->diffForHumans() }}</small>
                                                 </div>
@@ -192,34 +196,50 @@
                     </div>
                     
                     <!-- Add Review Form -->
-                    <div class="add-review-form mt-4 pt-4 border-top">
-                        <h5>Add Your Review</h5>
-                        <form id="reviewForm" action="{{ route('ulasan.store') }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="buku_id" value="{{ $buku->id }}">
-                            
-                            <div class="rating-input mb-3">
-                                <label class="form-label">Your Rating:</label>
-                                <div class="star-rating">
-                                    <div class="rating-stars">
-                                        @for($i = 5; $i >= 1; $i--)
-                                            <input type="radio" id="star{{$i}}" name="rating" value="{{$i}}" required>
-                                            <label for="star{{$i}}" class="star-label">
-                                                <i class="fas fa-star"></i>
-                                            </label>
-                                        @endfor
-                                    </div>
-                                </div>
-                            </div>
+                    <!-- Button to trigger modal -->
+<button type="button" class="btn btn-primary mt-4" data-bs-toggle="modal" data-bs-target="#reviewModal">
+    Add Your Review
+</button>
 
-                            <div class="mb-3">
-                                <label for="review" class="form-label">Your Review:</label>
-                                <textarea class="form-control" id="review" name="ulasan" rows="3" required></textarea>
+<!-- Review Modal -->
+<div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="reviewModalLabel">Add Your Review</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="reviewForm" action="{{ route('ulasan.store') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="buku_id" value="{{ $buku->id }}">
+                    
+                    <div class="rating-input mb-3">
+                        <label class="form-label">Your Rating:</label>
+                        <div class="star-rating">
+                            <div class="rating-stars">
+                                @for($i = 5; $i >= 1; $i--)
+                                    <input type="radio" id="star{{$i}}" name="rating" value="{{$i}}" required>
+                                    <label for="star{{$i}}" class="star-label">
+                                        <i class="fas fa-star"></i>
+                                    </label>
+                                @endfor
                             </div>
-
-                            <button type="submit" class="btn btn-primary">Submit Review</button>
-                        </form>
+                        </div>
                     </div>
+
+                    <div class="mb-3">
+                        <label for="review" class="form-label">Your Review:</label>
+                        <textarea class="form-control" id="review" name="ulasan" rows="3" required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit Review</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
                 </div>
             </div>
         </div>
