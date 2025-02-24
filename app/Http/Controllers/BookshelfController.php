@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -9,10 +8,20 @@ class BookshelfController extends Controller
 {
     public function index()
     {
-        // Ambil data peminjaman berdasarkan user yang sedang login
-        $peminjaman = Peminjaman::where('UserID', auth()->user()->id)
-                                  ->with('buku')
-                                  ->get();
-        return view('bookshelf', compact('peminjaman'));
+        $userId = auth()->user()->id;
+
+        // Ambil buku yang masih dipinjam
+        $borrowedBooks = Peminjaman::where('UserID', $userId)
+            ->where('StatusPeminjaman', 'borrowed')
+            ->with('buku')
+            ->get();
+
+        // Ambil buku yang sudah dikembalikan
+        $returnedBooks = Peminjaman::where('UserID', $userId)
+            ->where('StatusPeminjaman', 'returned')
+            ->with('buku')
+            ->get();
+
+        return view('bookshelf', compact('borrowedBooks', 'returnedBooks'));
     }
 }

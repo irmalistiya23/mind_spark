@@ -3,6 +3,9 @@ main{
     color: black;
 }
 
+p{
+    font-weight: 400;
+}
     /* Menyesuaikan ukuran book cover agar konsisten */
     .book-cover-container {
         position: relative;

@@ -11,6 +11,8 @@ use App\Http\Controllers\ManageController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\BookshelfController;
+use App\Http\Controllers\KategoriBukuController;
+
 
 
 
@@ -72,16 +74,30 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/ulasan', [UlasanController::class, 'store'])->name('ulasan.store');
 });
 
-//Route Manage User oleh Admin
-Route::prefix('manage')->group(function () {
-    Route::get('/', [ManageController::class, 'index'])->name('manage');
-    Route::get('/books/create', [ManageController::class, 'create'])->name('manage.books.create');
-    Route::post('/books', [ManageController::class, 'store'])->name('manage.books.store');
-    Route::get('/books/{id}/edit', [ManageController::class, 'edit'])->name('manage.books.edit');
-    Route::put('/books/{id}', [ManageController::class, 'update'])->name('manage.books.update');
-    Route::delete('/users/{id}', [ManageController::class, 'destroy'])->name('manage.destroy');
-    Route::delete('/books/{id}', [ManageController::class, 'destroyBook'])->name('manage.books.destroy');
+// Route untuk Manajemen User
+Route::get('/manage-user', [ManageController::class, 'index'])->name('manage-user');
+Route::delete('/manage-user/{id}', [ManageController::class, 'destroy'])->name('manage-user.destroy');
+
+Route::get('books/create', [ManageController::class, 'create'])->name('books.create');
+Route::get('books/edit/{id}', [ManageController::class, 'edit'])->name('books.edit');
+
+// Route untuk Manajemen Buku
+Route::prefix('manage-buku')->group(function () {
+    Route::get('/', [ManageController::class, 'indexBuku'])->name('manage-buku');
+    Route::post('/store', [ManageController::class, 'store'])->name('manage-buku.store');
+    Route::put('/update/{id}', [ManageController::class, 'update'])->name('manage-buku.update');
+    Route::delete('/destroy/{id}', [ManageController::class, 'destroyBook'])->name('manage-buku.destroy');
 });
+// manage kategori dan kategori buku
+Route::get('/manage-kategori', [KategoriBukuController::class, 'index'])->name('manage-kategori');
+Route::post('/manage-kategori/store', [KategoriBukuController::class, 'store'])->name('kategori.store');
+Route::delete('/manage-kategori/{id}', [KategoriBukuController::class, 'destroy'])->name('kategori.destroy');
+
+Route::get('/manage-buku-kategori', [KategoriBukuController::class, 'manageBukuKategori'])->name('manage-buku-kategori');
+Route::post('/manage-buku-kategori/store', [KategoriBukuController::class, 'storeBukuKategori'])->name('buku-kategori.store');
+Route::delete('/manage-buku-kategori/{id}', [KategoriBukuController::class, 'destroyBukuKategori'])->name('buku-kategori.destroy');
+Route::put('/manage-buku-kategori/{id}', [KategoriBukuController::class, 'update'])->name('buku-kategori.update');
+
 
 //favorit
 

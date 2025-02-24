@@ -9,6 +9,9 @@ main{
     color: black;
 }
 
+p{
+    font-weight: 400;
+}
 .category-title {
     margin-bottom: 15px;
     color: #333;

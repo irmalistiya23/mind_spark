@@ -3,6 +3,7 @@
 
 @section('konten')
 
+<link rel="stylesheet" href="{{ asset('css/bookshelf.css') }}">
 
 <div class="container mt-4">
     <h1>Your Favorite Books</h1>

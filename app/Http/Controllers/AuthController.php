@@ -23,13 +23,21 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required'
         ]);
-
+    
         if (Auth::attempt($credentials)) {
-            return redirect()->route('kategori'); // Redirect ke dashboard setelah login sukses
+            $user = Auth::user(); // Ambil data user yang sedang login
+    
+            // Cek role user dan tentukan halaman tujuan
+            if ($user->role == 'administrator' || $user->role == 'petugas') {
+                return redirect()->route('account');
+            } else {
+                return redirect()->route('kategori');
+            }
         }
-
+    
         return back()->with('error', 'Email atau password salah.');
     }
+    
 
     public function register(Request $request)
     {

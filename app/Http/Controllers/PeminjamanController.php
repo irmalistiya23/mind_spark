@@ -35,11 +35,10 @@ class PeminjamanController extends Controller
 
     public function update(Request $request, $id)
     {
-        // Hanya petugas yang dapat mengubah status
-        if (auth()->user()->role !== 'petugas') {
+        if (!in_array(auth()->user()->role, ['petugas', 'administrator'])) {
             return response()->json(['success' => false, 'message' => 'Unauthorized.']);
         }
-
+        
         $request->validate([
             'StatusPeminjaman' => 'required|in:borrowed,returned'
         ]);
@@ -54,7 +53,7 @@ class PeminjamanController extends Controller
 
         $peminjaman->save();
 
-        return response()->json(['success' => true, 'message' => 'Status updated successfully.']);
+        return redirect()->route('loaning')->with('success', 'Status updated successfully.');
     }
 
     public function showForm($id)
@@ -64,9 +63,10 @@ class PeminjamanController extends Controller
         return view('peminjaman.edit', compact('peminjaman'));
     }
     public function index()
-{
-    $peminjaman = Peminjaman::with(['user', 'buku'])->get();
-    return view('loaning', compact('peminjaman'));
-}
+    {
+        $peminjaman = Peminjaman::with(['user', 'buku'])->get();
+        return view('loaning', compact('peminjaman'));
+    }
+    
 
 }
