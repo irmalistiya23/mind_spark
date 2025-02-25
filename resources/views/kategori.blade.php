@@ -6,11 +6,11 @@
 </head>
 
 <body>
-    <div class="container mt-4">
+    <div class="container mt-12">
         <div class="row mb-4 align-items-center">
             <!-- Search Bar -->
-            <div class="col-md-4 text-end">
-                <div class="search-container">
+            <div class="col-md-12 text-end">
+                <div class="search-container search-bar">
                     <form action="{{ $action ?? request()->url() }}" method="GET" class="search-form">
                         @foreach(request()->except(['search', 'page']) as $key => $value)
                             <input type="hidden" name="{{ $key }}" value="{{ $value }}">
@@ -25,7 +25,7 @@
                 </div>
             </div><br>
             <!-- Kategori -->
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="category-container mb-4">
                     <h2 class="category-title">Category</h2>
                     <div class="category-list d-flex flex-wrap gap-2">

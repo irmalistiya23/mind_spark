@@ -46,15 +46,6 @@ main{
     background-color: white;
     color: black;
 }
-/* .sidebar {
-    width: 250px;
-    height: 100vh;
-    background-color: #1e1e2f;
-    color: white;
-    padding: 20px;
-    position: fixed;
-    overflow-y: auto;
-} */
 
 .sidebar a {
     margin-bottom: 10px;

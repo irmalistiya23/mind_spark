@@ -4,16 +4,21 @@ body{
     font-weight: 100;
     font-style: normal;
 }
-
+.search-bar{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
 main{
     color: black;
 }
 
 p{
-    font-weight: 400;
+    font-weight: 600;
 }
+
 .category-title {
-    margin-bottom: 15px;
+    font-size: 2rem;
+    margin: 15px;
     color: #333;
     font-weight: 600;
 }

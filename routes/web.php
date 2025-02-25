@@ -12,6 +12,7 @@ use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\BookshelfController;
 use App\Http\Controllers\KategoriBukuController;
+use App\Http\Controllers\DashboardController;
 
 
 
@@ -98,6 +99,11 @@ Route::post('/manage-buku-kategori/store', [KategoriBukuController::class, 'stor
 Route::delete('/manage-buku-kategori/{id}', [KategoriBukuController::class, 'destroyBukuKategori'])->name('buku-kategori.destroy');
 Route::put('/manage-buku-kategori/{id}', [KategoriBukuController::class, 'update'])->name('buku-kategori.update');
 
+
+
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware('auth')
+    ->name('dashboard'); // <--- Tambahkan ini
 
 //favorit
 

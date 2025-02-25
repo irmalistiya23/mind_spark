@@ -29,7 +29,7 @@ class AuthController extends Controller
     
             // Cek role user dan tentukan halaman tujuan
             if ($user->role == 'administrator' || $user->role == 'petugas') {
-                return redirect()->route('account');
+                return redirect()->route('dashboard');
             } else {
                 return redirect()->route('kategori');
             }

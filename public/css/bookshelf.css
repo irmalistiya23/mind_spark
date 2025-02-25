@@ -44,11 +44,13 @@ h1, h2 {
 }
 
 .card-img-top {
-    height: 200px;
+    height: 250px;
     object-fit: cover;
 }
 
 .card-body {
+    min-height: 200px;
+    max-height: 250px;
     text-align: center;
     padding: 15px;
 }
@@ -62,4 +64,27 @@ h1, h2 {
 .card-text {
     font-size: 14px;
     color: #666;
+}
+
+.empty-state {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.empty-image {
+    max-width: 200px;
+    margin-bottom: 15px;
+}
+
+.btn-light {
+    border: 1px solid #ddd;
+    padding: 10px 20px;
+    font-size: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.btn-light i {
+    font-size: 18px;
 }

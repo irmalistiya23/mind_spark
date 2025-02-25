@@ -187,6 +187,10 @@ img {
     color: #495057;
 }
 
+label{
+    font-weight: 700;
+}
+
 .form-text {
     color: #6c757d;
     font-size: 0.875rem;

@@ -14,10 +14,11 @@ body{
 
 /* Styling kartu profil */
 .account-card {
-    background: #ffffff;
+    border: 5px solid #fff08d;
+    background: white;
     padding: 25px;
     border-radius: 15px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 5px 8px 20px rgba(251, 255, 128, 0.1);
     width: 650px;
     text-align: center;
 }
@@ -102,7 +103,7 @@ body{
 
 /* Styling tombol */
 .save-btn {
-    background: #ffc107;
+    background: #89bcff;
     padding: 12px;
     margin-top: 15px;
     border: none;
@@ -115,7 +116,7 @@ body{
 }
 
 .save-btn:hover {
-    background: #ffb300;
+    background: #fff08d;
 }
 
 label{

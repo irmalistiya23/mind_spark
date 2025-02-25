@@ -31,7 +31,7 @@
             <i class="bi bi-house icon-custom"></i> Home
         </a>
         <a href="{{ route('bookshelf') }}" class="d-block {{ request()->is('bookshelf') ? 'active' : '' }}">
-            <i class="bi bi-book icon-custom"></i> Bookshelf
+            <i class="bi bi-bookshelf icon-custom"></i> Bookshelf
         </a>
         <a href="{{ route('favorite') }}" class="d-block {{ request()->is('favorite') ? 'active' : '' }}">
             <i class="bi bi-star icon-custom"></i> Favorites
@@ -47,17 +47,20 @@
             <p>Manage</p>
         </div>
         <hr>
+        <a href="{{ route('dashboard') }}" class="d-block {{ request()->is('dashboard') ? 'active' : '' }}">
+            <i class="bi bi-clipboard icon-custom"></i> Dashboard
+        </a>
         <a href="{{ route('loaning') }}" class="d-block {{ request()->is('loaning') ? 'active' : '' }}">
-            <i class="bi bi-chat icon-custom"></i> Loaning
+            <i class="bi bi-view-list icon-custom"></i> Loaning
         </a>
         <a href="{{ route('manage-buku') }}" class="d-block {{ request()->is('manage-buku') ? 'active' : '' }}">
-            <i class="bi bi-star icon-custom"></i> Books
+            <i class="bi bi-book icon-custom"></i> Books
         </a>
         <a href="{{ route('manage-kategori') }}" class="d-block {{ request()->is('manage-kategori') ? 'active' : '' }}">
-            <i class="bi bi-chat icon-custom"></i> Categories
+            <i class="bi bi-tags icon-custom"></i> Categories
         </a>
         <a href="{{ route('manage-buku-kategori') }}" class="d-block {{ request()->is('manage-buku-kategori') ? 'active' : '' }}">
-            <i class="bi bi-chat icon-custom"></i> Book Categories
+            <i class="bi bi-journal-bookmark icon-custom"></i> Book Categories
         </a>
 
             @if(Auth::user()->role == 'administrator')
