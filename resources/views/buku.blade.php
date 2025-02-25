@@ -93,7 +93,7 @@
                                     <i class="far fa-star text-warning"></i>
                                 @endif
                             @endfor
-                            <span class="rating-text ms-2">
+                            <span class="rating-text ms-2 fw-bold">
                                 {{ number_format($rating, 1) }} / 5.0
                                 <span class="text-muted">({{ $buku->reviews_count }} reviews)</span>
                             </span>
@@ -103,6 +103,7 @@
                     <!-- Ulasan -->
                     <div class="reviews mt-5">
                         <h4>Reviews ({{ $buku->reviews_count }})</h4>
+                        <!-- Existing Reviews -->
                         @if($buku->ulasans->count() > 0)
                             <div class="review-container">
                                 <div class="review-item mb-4">
@@ -119,7 +120,27 @@
                                                 @endfor
                                             </div>
                                         </div>
-                                        <small class="text-muted">{{ $buku->ulasans->first()->created_at->diffForHumans() }}</small>
+                                        
+                                        <!--biar akunnya bisa edit dan hapus ulasan-->
+                                        <div class="d-flex align-items-center">
+                                            @if(auth()->id() === $buku->ulasans->first()->user->id)
+                                                <button class="btn btn-sm btn-link text-primary me-2" 
+                                                        data-bs-toggle="modal" 
+                                                        data-bs-target="#editReviewModal{{ $buku->ulasans->first()->id }}">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <form action="{{ route('ulasan.destroy', $buku->ulasans->first()->id) }}" 
+                                                      method="POST" 
+                                                      class="d-inline delete-review-form">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-sm btn-link text-danger">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            @endif
+                                            <small class="text-muted ms-2">{{ $buku->ulasans->first()->created_at->diffForHumans() }}</small>
+                                        </div>
                                     </div>
                                     <div class="review-content mt-2">{{ $buku->ulasans->first()->Ulasan }}</div>
                                 </div>
@@ -139,7 +160,27 @@
                                                         @endfor
                                                     </div>
                                                 </div>
-                                                <small class="text-muted">{{ $ulasan->created_at->diffForHumans() }}</small>
+                                                <div class="d-flex align-items-center gap-2">
+                                                    @if(auth()->id() === $ulasan->user->id)
+                                                        <div class="d-flex gap-2">
+                                                            <button class="btn btn-sm p-0" 
+                                                                    data-bs-toggle="modal" 
+                                                                    data-bs-target="#editReviewModal{{ $ulasan->id }}">
+                                                                <i class="fas fa-edit text-primary"></i>
+                                                            </button>
+                                                            <form action="{{ route('ulasan.destroy', $ulasan->id) }}" 
+                                                                  method="POST" 
+                                                                  class="d-inline delete-review-form m-0">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="btn btn-sm p-0">
+                                                                    <i class="fas fa-trash text-danger"></i>
+                                                                </button>
+                                                            </form>
+                                                        </div>
+                                                    @endif
+                                                    <small class="text-muted ms-2">{{ $ulasan->created_at->diffForHumans() }}</small>
+                                                </div>
                                             </div>
                                             <div class="review-content mt-2">{{ $ulasan->Ulasan }}</div>
                                         </div>
@@ -152,12 +193,106 @@
                                 @endif
                             </div>
                         @else
-                            <div class="text-muted">No reviews yet. Be the first to review this book!</div>
+                            <div class="text">No reviews yet. Be the first to review this book!</div>
                         @endif
                     </div>
+                    
+                    <!-- Add Review Form -->
+                <button type="button" class="btn btn-primary mt-4" data-bs-toggle="modal" data-bs-target="#reviewModal">
+                    Add Your Review
+                </button>
+
+<!-- Review Modal -->
+<div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="reviewModalLabel">Add Your Review</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="reviewForm" action="{{ route('ulasan.store') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="buku_id" value="{{ $buku->id }}">
+                    
+                    <div class="rating-input mb-3">
+                        <label class="form-label">Your Rating:</label>
+                        <div class="star-rating">
+                            <div class="rating-stars">
+                                @for($i = 5; $i >= 1; $i--)
+                                    <input type="radio" id="star{{$i}}" name="rating" value="{{$i}}" required>
+                                    <label for="star{{$i}}" class="star-label">
+                                        <i class="fas fa-star"></i>
+                                    </label>
+                                @endfor
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="review" class="form-label">Your Review:</label>
+                        <textarea class="form-control" id="review" name="ulasan" rows="3" required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit Review</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
                 </div>
             </div>
         </div>
+
+        <!-- Edit Review Modals -->
+    @foreach($buku->ulasans as $ulasan)
+        <div class="modal fade" id="editReviewModal{{ $ulasan->id }}" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit Review</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="{{ route('ulasan.update', $ulasan->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label class="form-label">Rating:</label>
+                                <div class="star-rating">
+                                    @for($i = 5; $i >= 1; $i--)
+                                        <input type="radio" 
+                                               id="editStar{{ $ulasan->id }}_{{ $i }}" 
+                                               name="rating" 
+                                               value="{{ $i }}" 
+                                               {{ $ulasan->Rating == $i ? 'checked' : '' }}
+                                               required>
+                                        <label for="editStar{{ $ulasan->id }}_{{ $i }}" class="star-label">
+                                            <i class="fas fa-star"></i>
+                                        </label>
+                                    @endfor
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="ulasan{{ $ulasan->id }}" class="form-label">Your Review:</label>
+                                <textarea class="form-control" 
+                                          id="ulasan{{ $ulasan->id }}" 
+                                          name="ulasan" 
+                                          rows="3" 
+                                          required>{{ $ulasan->Ulasan }}</textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endforeach
 
             <!-- Book List -->
         <h3 class="mt-5">Other Books</h3>

@@ -13,7 +13,7 @@
 <body>
     <div class="sidebar">
         <div class="text-center">
-            <i class="bi bi-image"></i> Logo
+            <img src="" alt="">MindSpark
         </div>
         <div class="text-center">
             <img src="{{ Auth::user()->foto_url }}" alt="User Avatar" class="user-avatar img-fluid rounded-circle">

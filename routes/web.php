@@ -120,5 +120,11 @@ Route::get('/loaning', [PeminjamanController::class, 'index'])->name('loaning');
 Route::put('/loaning/{id}', [PeminjamanController::class, 'update'])->name('loaning.update');
 Route::delete('/loaning/{id}', [PeminjamanController::class, 'destroy'])->name('loaning.destroy');
 
+// Routes for Ulasan (Reviews)
+Route::middleware(['auth'])->group(function () {
+    Route::post('/ulasan', [UlasanController::class, 'store'])->name('ulasan.store');
+    Route::put('/ulasan/{ulasan}', [UlasanController::class, 'update'])->name('ulasan.update');
+    Route::delete('/ulasan/{ulasan}', [UlasanController::class, 'destroy'])->name('ulasan.destroy');
+});
 
 ?>

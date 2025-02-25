@@ -22,7 +22,7 @@
                     <th>Loan Date</th>
                     <th>Status</th>
                     <th>Return Date</th>
-                    <th>Acttion</th>
+                    {{-- <th>Acttion</th> --}}
                 </tr>
             </thead>
             <tbody>
@@ -44,13 +44,13 @@
                         </td>
                         <td>{{ $item->TanggalPengembalian }}</td>
     
-                        <td>
+                        {{-- <td>
                             <form action="{{ route('loaning.destroy', $item->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
                             </form>
-                        </td>
+                        </td> --}}
                     </tr>
                 @endforeach
             </tbody>

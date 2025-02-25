@@ -1,7 +1,10 @@
 main{
+    font-weight: 500;
+
     background-color: white;
     color: black;
 }
+
 
 p{
     font-weight: 400;
@@ -67,5 +70,59 @@ p{
         font-size: 0.9rem;
         color: #666;
         margin: 0;
+    }
+
+    .star-rating input[type="radio"] {
+        display: none;
+    }
+    
+    .star-label {
+        cursor: pointer;
+        padding: 0 2px;
+        font-size: 24px;
+        color: #ddd;
+        transition: color 0.2s;
+    }
+    
+    .star-label:hover,
+    .star-label:hover ~ .star-label,
+    .star-rating input[type="radio"]:checked ~ .star-label {
+        color: #ffc107;
+    }
+    
+    .star-rating input[type="radio"]:checked + .star-label {
+        color: #ffc107;
+    }
+    
+    /* Styling untuk bintang yang sudah ada */
+    .stars .fas.fa-star,
+    .stars .fas.fa-star-half-alt,
+    .stars .far.fa-star {
+        font-size: 20px;
+        margin-right: 2px;
+    }
+    
+    /* Hover effect untuk bintang edit */
+    .modal .star-rating {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-start;
+    }
+    
+    .modal .star-rating input[type="radio"] {
+        display: none;
+    }
+    
+    .modal .star-rating label {
+        cursor: pointer;
+        padding: 0 2px;
+        font-size: 24px;
+        color: #ddd;
+    }
+    
+    .modal .star-rating label:hover,
+    .modal .star-rating label:hover ~ label,
+    .modal .star-rating input[type="radio"]:checked ~ label {
+        color: #ffc107;
     }
     
