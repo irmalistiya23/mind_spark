@@ -16,9 +16,9 @@
                             <input type="hidden" name="{{ $key }}" value="{{ $value }}">
                         @endforeach
                         <div class="search-wrapper d-flex">
-                            <input type="text" name="search" class="form-control me-2" placeholder="What book are you looking for...." value="{{ request('search') }}">
+                            <input type="text" name="search" class="form-control me-2" placeholder="Buku apa yang anda cari...." value="{{ request('search') }}">
                             <button type="submit" class="btn btn-primary">
-                                Search
+                                Cari
                             </button>
                         </div>
                     </form>
@@ -27,11 +27,11 @@
             <!-- Kategori -->
             <div class="col-md-12">
                 <div class="category-container mb-4">
-                    <h2 class="category-title">Category</h2>
+                    <h2 class="category-title">Kategori</h2>
                     <div class="category-list d-flex flex-wrap gap-2">
                         <a href="{{ route('kategori') }}" 
                            class="btn btn-outline-primary {{ !request('KategoriID') ? 'active' : '' }}">
-                            All Categories
+                           Semua Kategori
                         </a>
                         @foreach($kategoris as $kategori)
                             <a href="{{ route('kategori', ['KategoriID' => $kategori->id]) }}" 
@@ -55,13 +55,13 @@
                                  alt="{{ $buku->NamaBuku }}" 
                                  class="book-cover">
                         @else
-                            <div class="no-image">No Image Available</div>
+                            <div class="no-image">Gambar tidak tersedia</div>
                         @endif
                         <div class="book-info">
                             <h5 class="book-title">{{ $buku->NamaBuku }}</h5>
                             <p class="book-author">{{ $buku->penulis }}</p>
                             <p class="book-category">
-                                Categories: 
+                                Kategori: 
                                 @foreach($buku->kategoris as $kategori)
                                     <span class="badge bg-primary">{{ $kategori->NamaKategori }}</span>
                                 @endforeach
@@ -73,7 +73,7 @@
             @empty
             <div class="col-12">
                 <div class="alert alert-info text-center">
-                    No books found.
+                    Buku tidak ditemukan.
                 </div>
             </div>
             @endforelse

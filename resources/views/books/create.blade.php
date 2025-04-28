@@ -9,7 +9,7 @@
     <div class="container mt-4">
         <div class="row mb-4">
             <div class="col">
-                <h2>Add New Book</h2>
+                <h2>Tambah Buku Baru</h2>
             </div>
         </div>
 
@@ -29,7 +29,7 @@
                     @csrf
                     
                     <div class="mb-3">
-                        <label for="NamaBuku" class="form-label">Judul Buku</label>
+                        <label for="NamaBuku" class="form-label">Judul</label>
                         <input type="text" class="form-control" id="NamaBuku" name="NamaBuku" 
                                value="{{ old('NamaBuku') }}" required>
                     </div>
@@ -72,7 +72,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="CoverBuku" class="form-label">Cover Buku</label>
+                        <label for="CoverBuku" class="form-label">Sampul Buku</label>
                         <input type="file" class="form-control" id="CoverBuku" name="CoverBuku" 
                                accept="image/jpeg,image/png,image/jpg" required>
                         <div id="imagePreview" class="mt-2" style="display: none;">

@@ -23,18 +23,18 @@
         </div>
         <hr>
         <a href="{{ route('account') }}" class="d-block {{ request()->is('account') ? 'active' : '' }}">
-            <i class="bi bi-person icon-custom"></i> Account
+            <i class="bi bi-person icon-custom"></i> Akun
         </a>
 
         @if(Auth::user()->role == 'user')
         <a href="{{ route('kategori') }}" class="d-block {{ request()->is('kategori') ? 'active' : '' }}">
-            <i class="bi bi-house icon-custom"></i> Home
+            <i class="bi bi-house icon-custom"></i> Beranda
         </a>
         <a href="{{ route('bookshelf') }}" class="d-block {{ request()->is('bookshelf') ? 'active' : '' }}">
-            <i class="bi bi-bookshelf icon-custom"></i> Bookshelf
+            <i class="bi bi-bookshelf icon-custom"></i> Rak Buku
         </a>
         <a href="{{ route('favorite') }}" class="d-block {{ request()->is('favorite') ? 'active' : '' }}">
-            <i class="bi bi-star icon-custom"></i> Favorites
+            <i class="bi bi-star icon-custom"></i> Favorit
         </a>
         <a href="{{ route('chatcs') }}" class="d-block {{ request()->is('chatcs') ? 'active' : '' }}">
             <i class="bi bi-chat icon-custom"></i> Chat CS
@@ -44,28 +44,28 @@
         @elseif(Auth::user()->role == 'administrator' || Auth::user()->role == 'petugas')
         <hr>
         <div class="text-center">
-            <p>Manage</p>
+            <p>Kelola</p>
         </div>
         <hr>
         <a href="{{ route('dashboard') }}" class="d-block {{ request()->is('dashboard') ? 'active' : '' }}">
-            <i class="bi bi-clipboard icon-custom"></i> Dashboard
+            <i class="bi bi-clipboard icon-custom"></i> Dasbor
         </a>
         <a href="{{ route('loaning') }}" class="d-block {{ request()->is('loaning') ? 'active' : '' }}">
-            <i class="bi bi-view-list icon-custom"></i> Loaning
+            <i class="bi bi-view-list icon-custom"></i> Peminjaman
         </a>
         <a href="{{ route('manage-buku') }}" class="d-block {{ request()->is('manage-buku') ? 'active' : '' }}">
-            <i class="bi bi-book icon-custom"></i> Books
+            <i class="bi bi-book icon-custom"></i> Buku
         </a>
         <a href="{{ route('manage-kategori') }}" class="d-block {{ request()->is('manage-kategori') ? 'active' : '' }}">
-            <i class="bi bi-tags icon-custom"></i> Categories
+            <i class="bi bi-tags icon-custom"></i> Kategori
         </a>
         <a href="{{ route('manage-buku-kategori') }}" class="d-block {{ request()->is('manage-buku-kategori') ? 'active' : '' }}">
-            <i class="bi bi-journal-bookmark icon-custom"></i> Book Categories
+            <i class="bi bi-journal-bookmark icon-custom"></i> Kategori Buku
         </a>
 
             @if(Auth::user()->role == 'administrator')
             <a href="{{ route('manage-user') }}" class="d-block {{ request()->is('manage-user') ? 'active' : '' }}">
-                <i class="bi bi-chat icon-custom"></i> Users
+                <i class="bi bi-chat icon-custom"></i> Pengguna
             </a>
             @endif
 
@@ -73,7 +73,7 @@
 
         <div class="logout-section">
             <a href="#" class="d-block logout-link" data-bs-toggle="modal" data-bs-target="#logoutModal">
-                <i class="bi bi-box-arrow-right icon-custom"></i> Logout
+                <i class="bi bi-box-arrow-right icon-custom"></i> Keluar
             </a>
         </div>
     </div>
@@ -87,17 +87,17 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="logoutModalLabel">Konfirmasi Logout</h5>
+                    <h5 class="modal-title" id="logoutModalLabel">Konfirmasi Keluar</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Apakah Anda yakin ingin logout?
+                    Apakah Anda yakin ingin keluar?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
-                        <button type="submit" class="btn btn-primary">Logout</button>
+                        <button type="submit" class="btn btn-primary">Keluar</button>
                     </form>
                 </div>
             </div>

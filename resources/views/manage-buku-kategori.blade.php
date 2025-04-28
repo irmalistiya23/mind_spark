@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="{{ asset('css/kategoribuku.css') }}">
 
 <div class="container">
-    <h2 class="mb-4">Manage Buku-Kategori</h2>
+    <h2 class="mb-4">Kelola Kategori Buku</h2>
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
@@ -14,7 +14,7 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Judul Buku</th>
+                <th>Judul</th>
                 <th>Kategori</th>
                 <th>Aksi</th>
             </tr>
@@ -31,7 +31,7 @@
                 </td>
                 <td>
                     <!-- Button untuk edit kategori -->
-                    <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editKategoriModal{{ $buku->id }}">Edit Kategori</button>
+                    <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editKategoriModal{{ $buku->id }}">Ubah Kategori</button>
                 </td>
             </tr>
 
@@ -40,7 +40,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Edit Kategori - {{ $buku->judul }}</h5>
+                            <h5 class="modal-title">Edit Kategori - {{ $buku->NamaBuku }}</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">

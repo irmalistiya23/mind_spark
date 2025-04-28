@@ -5,10 +5,6 @@
 
 <div class="account-container">
     <div class="account-card">
-
-
-        
-
         <form action="{{ route('account.update') }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
@@ -18,7 +14,7 @@
             </div>
             <div class="avatar-container">
                 <label for="foto" class="edit-photo">
-                    <i class="bi bi-camera"></i> Change Photo
+                    <i class="bi bi-camera"></i> Ganti Foto
                 </label>
                 <input type="file" id="foto" name="foto" hidden>
             </div>
@@ -28,7 +24,7 @@
                     <input type="text" id="nis" name="nis" value="{{ Auth::user()->nis }}" disabled>
                 </div>
                 <div class="form-group">
-                    <label for="nama">Name</label>
+                    <label for="nama">Nama</label>
                     <input type="text" id="nama" name="nama" value="{{ Auth::user()->nama }}" required>
                     <i class="bi bi-person"></i>
                 </div>
@@ -36,7 +32,7 @@
 
             <div class="form-row">
                 <div class="form-group">
-                    <label for="alamat">Address</label>
+                    <label for="alamat">Alamat</label>
                     <input type="text" id="alamat" name="alamat" value="{{ Auth::user()->alamat }}">
                     <i class="bi bi-geo-alt"></i>
                 </div>
@@ -47,7 +43,7 @@
                 </div>
             </div>
 
-            <button type="submit" class="save-btn">Save Changes</button>
+            <button type="submit" class="save-btn">Simpan Perubahan</button>
         </form>
     </div>
 </div>

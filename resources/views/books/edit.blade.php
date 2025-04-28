@@ -8,7 +8,7 @@
     <div class="container mt-4">
         <div class="row mb-4">
             <div class="col">
-                <h2>Edit Book</h2>
+                <h2>Ubah Buku</h2>
             </div>
         </div>
 
@@ -29,7 +29,7 @@
                     @method('PUT')
                     
                     <div class="mb-3">
-                        <label for="NamaBuku" class="form-label">Judul Buku</label>
+                        <label for="NamaBuku" class="form-label">Judul</label>
                         <input type="text" class="form-control" id="NamaBuku" name="NamaBuku" 
                                value="{{ old('NamaBuku', $buku->NamaBuku) }}" required>
                     </div>
@@ -72,7 +72,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="CoverBuku" class="form-label">Cover Buku</label>
+                        <label for="CoverBuku" class="form-label">Sampul Buku</label>
                         @if($buku->CoverBuku)
                             <div class="mb-2">
                                 <img src="{{ asset('storage/cover_buku/' . $buku->CoverBuku) }}" 
@@ -89,7 +89,7 @@
 
                     <div class="text-end">
                         <a href="{{ route('manage-buku') }}" class="btn btn-secondary me-2">Batal</a>
-                        <button type="submit" class="btn btn-primary">Update Buku</button>
+                        <button type="submit" class="btn btn-primary">Perbarui Buku</button>
                     </div>
                 </form>
             </div>

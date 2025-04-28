@@ -7,17 +7,17 @@
         <div class="col-md-12">
             <div class="card mt-4">
                 <div class="card-header">
-                    <h3 class="card-title">Manage Books</h3>
-                    <a href="{{ route('books.create') }}" class="btn btn-primary float-end">Add New Book</a>
+                    <h3 class="card-title">Kelola Buku</h3>
+                    <a href="{{ route('books.create') }}" class="btn btn-primary float-end">Tambah Buku Baru</a>
                 </div>
                 <div class="card-body">
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Title</th>
-                                <th>Author</th>
-                                <th>Publisher</th>
-                                <th>Actions</th>
+                                <th>Judul</th>
+                                <th>Penulis</th>
+                                <th>Penerbit</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -27,9 +27,9 @@
                                 <td>{{ $book->penulis }}</td>
                                 <td>{{ $book->penerbit }}</td>
                                 <td>
-                                    <a href="{{ route('books.edit', $book->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                                    <a href="{{ route('books.edit', $book->id) }}" class="btn btn-sm btn-warning">Ubah</a>
                                     <!-- Tombol Delete yang membuka modal -->
-                                    <button class="btn btn-sm btn-danger" onclick="confirmDelete({{ $book->id }})">Delete</button>
+                                    <button class="btn btn-sm btn-danger" onclick="confirmDelete({{ $book->id }})">Hapus</button>
                                 </td>
                             </tr>
                             @endforeach
@@ -46,18 +46,18 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+                <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Hapus</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Are you sure you want to delete this book?
+                Anda yakin mau menghapus buku ini?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                 <form id="deleteForm" method="POST">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <button type="submit" class="btn btn-danger">Hapus</button>
                 </form>
             </div>
         </div>

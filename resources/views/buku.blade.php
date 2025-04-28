@@ -24,7 +24,7 @@
                     @if($buku->CoverBuku)
                         <img src="{{ asset('storage/cover_buku/' . $buku->CoverBuku) }}" alt="{{ $buku->NamaBuku }}" class="img-fluid">
                     @else
-                        <div class="no-image p-5 bg-light text-center rounded">No Image Available</div>
+                        <div class="no-image p-5 bg-light text-center rounded">Gambar tidak tersedia</div>
                     @endif
                 </div>
             </div>
@@ -42,11 +42,11 @@
                         <p class="publisher mb-2">{{ $buku->deskripsi }}</p><br>
                         <div class="mt-3">
                             @if($isBorrowed)
-                                <button type="button" class="btn btn-secondary" disabled>Borrowed</button>
+                                <button type="button" class="btn btn-secondary" disabled>Dipinjam</button>
                             @else
                                 <form id="borrowForm" action="{{ route('borrow', $buku->id) }}" method="POST">
                                     @csrf
-                                    <button type="submit" id="borrowButton" class="btn btn-success">Borrow</button>
+                                    <button type="submit" id="borrowButton" class="btn btn-success">Pinjam</button>
                                 </form>
                             @endif
                         </div>
@@ -56,21 +56,21 @@
                           <div class="modal-dialog">
                             <div class="modal-content">
                               <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="borrowModalLabel">Book Successfully Borrowed</h1>
+                                <h1 class="modal-title fs-5" id="borrowModalLabel">Buku sukses dipinjam</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                               </div>
-                              <div class="modal-body">
-                                You have successfully borrowed the book.
-                              </div>
+                                <div class="modal-body">
+                                    Anda telah berhasil meminjam buku.
+                                </div>
                               <div class="modal-footer">
-                                <button type="button" id="checkBookshelf" class="btn btn-primary">Check Bookshelf</button>
+                                <button type="button" id="checkBookshelf" class="btn btn-primary">Periksa buku yang dipinjam</button>
                                 <button type="button" id="okButton" class="btn btn-secondary" data-bs-dismiss="modal">Ok</button>
                               </div>
                             </div>
                           </div>
                         </div>
                                     
-                        <h4>Rating</h4>
+                        <h4>Penilaian</h4>
                     </div>
                     <div class="book-actions mt-4">
               </div>
@@ -188,7 +188,7 @@
                                 </div>
                                 @if($buku->ulasans->count() > 1)
                                     <div class="text-center mt-3">
-                                        <button class="btn btn-link show-more-btn">Show More</button>
+                                        <button class="btn btn-link show-more-btn">Tampilkan lebih banyak</button>
                                     </div>
                                 @endif
                             </div>
@@ -199,7 +199,7 @@
                     
                     <!-- Add Review Form -->
                 <button type="button" class="btn btn-primary mt-4" data-bs-toggle="modal" data-bs-target="#reviewModal">
-                    Add Your Review
+                    Tambah penilaian anda
                 </button>
 
 <!-- Review Modal -->
@@ -207,7 +207,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="reviewModalLabel">Add Your Review</h5>
+                <h5 class="modal-title" id="reviewModalLabel">Tambah Penilaian</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -216,7 +216,7 @@
                     <input type="hidden" name="buku_id" value="{{ $buku->id }}">
                     
                     <div class="rating-input mb-3">
-                        <label class="form-label">Your Rating:</label>
+                        <label class="form-label">Bintang:</label>
                         <div class="star-rating">
                             <div class="rating-stars">
                                 @for($i = 5; $i >= 1; $i--)
@@ -230,11 +230,11 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="review" class="form-label">Your Review:</label>
+                        <label for="review" class="form-label">Komentar:</label>
                         <textarea class="form-control" id="review" name="ulasan" rows="3" required></textarea>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Submit Review</button>
+                    <button type="submit" class="btn btn-primary">Kirim Penilaian</button>
                 </form>
             </div>
         </div>
@@ -251,7 +251,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Edit Review</h5>
+                        <h5 class="modal-title">Ubah Penilaian</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form action="{{ route('ulasan.update', $ulasan->id) }}" method="POST">
@@ -259,7 +259,7 @@
                         @method('PUT')
                         <div class="modal-body">
                             <div class="mb-3">
-                                <label class="form-label">Rating:</label>
+                                <label class="form-label">Bintang:</label>
                                 <div class="star-rating">
                                     @for($i = 5; $i >= 1; $i--)
                                         <input type="radio" 
@@ -276,7 +276,7 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="ulasan{{ $ulasan->id }}" class="form-label">Your Review:</label>
+                                <label for="ulasan{{ $ulasan->id }}" class="form-label">Komentar:</label>
                                 <textarea class="form-control" 
                                           id="ulasan{{ $ulasan->id }}" 
                                           name="ulasan" 
@@ -285,8 +285,8 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                         </div>
                     </form>
                 </div>
@@ -295,7 +295,7 @@
     @endforeach
 
             <!-- Book List -->
-        <h3 class="mt-5">Other Books</h3>
+        <h3 class="mt-5">Buku Lainnya</h3>
         <div class="row mt-3">
             @foreach($otherBooks as $buku)
                 <div class="col-6 col-md-3 mb-4">
@@ -347,7 +347,7 @@
                     .then(data => {
                         if(data.success){
                             // Ubah tombol menjadi 'Borrowed', ganti warna dan nonaktifkan
-                            borrowButton.textContent = 'Borrowed';
+                            borrowButton.textContent = 'Dipinjam';
                             borrowButton.classList.remove('btn-success');
                             borrowButton.classList.add('btn-secondary');
                             borrowButton.disabled = true;
@@ -378,11 +378,11 @@
                 showMoreBtn.addEventListener('click', function() {
                     if (additionalReviews.style.display === 'none') {
                         additionalReviews.style.display = 'block';
-                        showMoreBtn.textContent = 'Show Less';
+                        showMoreBtn.textContent = 'Lebih sedikit';
                         additionalReviews.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                     } else {
                         additionalReviews.style.display = 'none';
-                        showMoreBtn.textContent = 'Show More';
+                        showMoreBtn.textContent = 'Tampilkan lebih banyak';
                         document.querySelector('.reviews').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                     }
                 });

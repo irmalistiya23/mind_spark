@@ -35,22 +35,22 @@
 
       <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
         <!-- Uncomment the line below if you also wish to use an image logo -->
-        <img src="assets/img/logo.png" alt="">
+        <img src="assets/img/logo2.png" alt="">
         <h1 class="sitename">MindSpark</h1>
       </a>
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li class="{{ request()->is('welcome') ? 'active' : '' }}"><a href="{{ route('welcome') }}">Home</a></li>
-          <li class="{{ request()->is('about') ? 'active' : '' }}"><a href="{{ route('about') }}">About</a></li>
-          <li class="{{ request()->is('contact') ? 'active' : '' }}"><a href="{{ route('contact') }}">Contact</a></li>
+          <li class="{{ request()->is('welcome') ? 'active' : '' }}"><a href="{{ route('welcome') }}">Beranda</a></li>
+          <li class="{{ request()->is('about') ? 'active' : '' }}"><a href="{{ route('about') }}">Tentang</a></li>
+          <li class="{{ request()->is('contact') ? 'active' : '' }}"><a href="{{ route('contact') }}">Kontak</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
       <div>
-        <a class="btn-getstarted-outline-primary " href="{{ route('login') }}">Sign In</a>
-        <a class="btn-getstarted" href="{{ route('register') }}">Sign Up</a>
+        <a class="btn-getstarted-outline-primary " href="{{ route('login') }}">Masuk</a>
+        <a class="btn-getstarted" href="{{ route('register') }}">Daftar</a>
       </div>
 
 

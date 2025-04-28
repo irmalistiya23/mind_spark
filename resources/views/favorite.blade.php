@@ -5,13 +5,13 @@
 <link rel="stylesheet" href="{{ asset('css/bookshelf.css') }}">
 
 <div class="container mt-4 text-center">
-    <h1>Your Favorite Books</h1>
+    <h1>Buku Favorit Anda</h1>
 
     @if($favorites->isEmpty())
         <div class="empty-state">
-            <p>You haven't favored any books yet</p>
+            <p>Anda belum menyukai buku apa pun</p>
             <a href="{{ route('kategori') }}" class="btn btn-light">
-                Find books <i class="bi bi-plus-circle"></i>
+                Cari Buku <i class="bi bi-plus-circle"></i>
             </a>
         </div>
     @else

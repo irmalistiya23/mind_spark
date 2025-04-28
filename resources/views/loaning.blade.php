@@ -3,7 +3,7 @@
 @section('konten')
 <link rel="stylesheet" href="{{ asset('css/loaning.css') }}">
 <div class="container">
-    <h2 class="mb-4 text-center">Book Loan List</h2>
+    <h2 class="mb-4 text-center">Daftar Peminjaman Buku</h2>
 
     @if(session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -17,12 +17,12 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Name</th>
-                    <th>Book Title</th>
-                    <th>Loan Date</th>
+                    <th>Nama</th>
+                    <th>Judul</th>
+                    <th>Tanggal Peminjaman</th>
                     <th>Status</th>
-                    <th>Return Date</th>
-                    {{-- <th>Acttion</th> --}}
+                    <th>Tanggal Kembali</th>
+                    {{-- <th>Aksi</th> --}}
                 </tr>
             </thead>
             <tbody>
@@ -37,8 +37,8 @@
                                 @csrf
                                 @method('PUT')
                                 <select name="StatusPeminjaman" class="form-select" onchange="this.form.submit()">
-                                    <option value="borrowed" {{ $item->StatusPeminjaman == 'borrowed' ? 'selected' : '' }}>Borrowed</option>
-                                    <option value="returned" {{ $item->StatusPeminjaman == 'returned' ? 'selected' : '' }}>Returned</option>
+                                    <option value="borrowed" {{ $item->StatusPeminjaman == 'borrowed' ? 'selected' : '' }}>Dipinjam</option>
+                                    <option value="returned" {{ $item->StatusPeminjaman == 'returned' ? 'selected' : '' }}>Dikembalikan</option>
                                 </select>
                             </form>
                         </td>

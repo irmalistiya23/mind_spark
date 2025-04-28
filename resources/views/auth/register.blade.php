@@ -9,7 +9,7 @@
 </style>
 <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
     <div class="card shadow-lg p-4" style="width: 550px; border-radius: 10px;">
-        <h3 class="text-center mb-4">Sign Up</h3>
+        <h3 class="text-center mb-4">Daftar</h3>
 
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -40,18 +40,18 @@
                 <input type="text" class="form-control" name="alamat" required>
             </div>
             <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
+                <label for="password" class="form-label">Kata Sandi</label>
                 <input type="password" class="form-control" name="password" required>
             </div>
             <div class="mb-3">
-                <label for="password_confirmation" class="form-label">Confirm Password</label>
+                <label for="password_confirmation" class="form-label">Konfirmasi Kata Sandi</label>
                 <input type="password" class="form-control" name="password_confirmation" required>
             </div>
-            <button type="submit" class="btn btn-primary w-100">Register</button>
+            <button type="submit" class="btn btn-primary w-100">Daftar</button>
         </form>
 
         <div class="text-center mt-3">
-            <small>Sudah punya akun? <a href="{{ url('/login') }}">Login</a></small>
+            <small>Sudah punya akun? <a href="{{ url('/login') }}">Masuk</a></small>
         </div>
     </div>
 </div>

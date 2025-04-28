@@ -8,15 +8,15 @@
         <div class="col-md-12">
             <div class="card mt-4">
                 <div class="card-header">
-                    <h3 class="card-title">Manage Users</h3>
+                    <h3 class="card-title">Kelola Pengguna</h3>
                 </div>
                 <div class="card-body">
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Name</th>
+                                <th>Nama</th>
                                 <th>Email</th>
-                                <th>Actions</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -27,7 +27,7 @@
                                 <td>
                                     <button type="button" class="btn btn-sm btn-danger"
                                     onclick="confirmDelete('{{ route('manage-user.destroy', $user->id) }}', '{{ $user->nama }}')">
-                                Delete
+                                Hapus
                             </button>
                             
 

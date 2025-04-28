@@ -1,13 +1,13 @@
 @extends('navbar')
 
 @section('konten')
-    <!-- Contact Section -->
+    <!-- Section Kontak -->
     <section id="contact" class="contact section light-background">
 
-        <!-- Section Title -->
+        <!-- Judul Section -->
         <div class="container section-title" data-aos="fade-up">
-          {{-- <h2>Contact</h2>
-          <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p> --}}
+          {{-- <h2>Kontak</h2>
+          <p>Butuh bantuan atau ada pertanyaan? Silakan hubungi kami.</p> --}}
         </div><!-- End Section Title -->
   
         <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -15,17 +15,17 @@
           <div class="row g-4 g-lg-5">
             <div class="col-lg-5">
               <div class="info-box" data-aos="fade-up" data-aos-delay="200">
-                <h3>Contact Info</h3>
-                <p>Got any questions or need assistance? Feel free to reach out to us!</p>
+                <h3>Informasi Kontak</h3>
+                <p>Punya pertanyaan atau butuh bantuan? Jangan ragu untuk menghubungi kami!</p>
   
                 <div class="info-item" data-aos="fade-up" data-aos-delay="300">
                   <div class="icon-box">
                     <i class="bi bi-geo-alt"></i>
                   </div>
                   <div class="content">
-                    <h4>Library Location</h4>
+                    <h4>Lokasi Perpustakaan</h4>
                     <p>SMKN 11 Bandung</p>
-                    <p> Jl. Budhi Cilember, Sukaraja, Cicendo, Sukaraja, Cicendo, Kota Bandung, Jawa Barat 40153, Indonesia</p>
+                    <p>Jl. Budhi Cilember, Sukaraja, Cicendo, Kota Bandung, Jawa Barat 40153, Indonesia</p>
                   </div>
                 </div>
   
@@ -34,7 +34,7 @@
                     <i class="bi bi-telephone"></i>
                   </div>
                   <div class="content">
-                    <h4>Phone Number</h4>
+                    <h4>Nomor Telepon</h4>
                     <p>+1 5589 55488 55</p>
                     <p>+1 6678 254445 41</p>
                   </div>
@@ -45,10 +45,9 @@
                     <i class="bi bi-clock"></i>
                   </div>
                   <div class="content">
-                    <h4>Operating Hours </h4>
-                    <p>Monday - Friday: 7:00 AM – 3:00 PM</p>
-                    <p>Saturday – Sunday: Closed </p>
-
+                    <h4>Jam Operasional</h4>
+                    <p>Senin - Jumat: 07.00 – 15.00 WIB</p>
+                    <p>Sabtu – Minggu: Tutup</p>
                   </div>
                 </div>
   
@@ -57,7 +56,7 @@
                     <i class="bi bi-envelope"></i>
                   </div>
                   <div class="content">
-                    <h4>Email Address</h4>
+                    <h4>Alamat Email</h4>
                     <p>mindsparkinfo@gmail.com</p>
                   </div>
                 </div>
@@ -66,34 +65,34 @@
   
             <div class="col-lg-7">
               <div class="contact-form" data-aos="fade-up" data-aos-delay="300">
-                <h3>Get In Touch</h3>
-                <p>Feel free to reach out to us by filling out the form below. Our team will respond to your inquiry promptly.</p>
+                <h3>Hubungi Kami</h3>
+                <p>Silakan isi formulir di bawah ini untuk menghubungi kami. Tim kami akan segera merespons pertanyaan Anda.</p>
   
                 <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
                   <div class="row gy-4">
   
                     <div class="col-md-6">
-                      <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
+                      <input type="text" name="name" class="form-control" placeholder="Nama Anda" required="">
                     </div>
   
                     <div class="col-md-6 ">
-                      <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
+                      <input type="email" class="form-control" name="email" placeholder="Email Anda" required="">
                     </div>
   
                     <div class="col-12">
-                      <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
+                      <input type="text" class="form-control" name="subject" placeholder="Subjek" required="">
                     </div>
   
                     <div class="col-12">
-                      <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
+                      <textarea class="form-control" name="message" rows="6" placeholder="Pesan" required=""></textarea>
                     </div>
   
                     <div class="col-12 text-center">
-                      <div class="loading">Loading</div>
+                      <div class="loading">Memuat</div>
                       <div class="error-message"></div>
-                      <div class="sent-message">Your message has been sent. Thank you!</div>
+                      <div class="sent-message">Pesan Anda telah terkirim. Terima kasih!</div>
   
-                      <button type="submit" class="btn">Send Message</button>
+                      <button type="submit" class="btn">Kirim Pesan</button>
                     </div>
   
                   </div>
@@ -106,7 +105,6 @@
   
         </div>
   
-      </section><!-- /Contact Section -->
+      </section><!-- /Section Kontak -->
 
 @endsection
-  

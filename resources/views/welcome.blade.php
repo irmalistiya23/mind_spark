@@ -17,24 +17,23 @@
             <div class="hero-content" data-aos="fade-up" data-aos-delay="200">
               <div class="company-badge mb-4">
                 <i class="bi bi-gear-fill me-2"></i>
-                Working for your success
+                Bekerja untuk kesuksesan anda
               </div>
 
               <h1 class="mb-4">
-                Welcome to <br>
+                Selamat Datang di <br>
                 <span class="accent-text">MindSpark</span>
               </h1>
 
               <p class="mb-4 mb-md-5">
-                Explore collections of books, journals and articles from various fields of science.
-
+                Jelajahi koleksi buku, jurnal, dan artikel dari berbagai bidang sains.
               </p>
 
               <div class="hero-buttons">
-                <a href="#about" class="btn btn-primary me-0 me-sm-2 mx-1">Get Started</a>
+                <a href="#about" class="btn btn-primary me-0 me-sm-2 mx-1">Mulai</a>
                 <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="btn btn-link mt-2 mt-sm-0 glightbox">
                   <i class="bi bi-play-circle me-1"></i>
-                  Play Video
+                  Putar Video
                 </a>
               </div>
             </div>
@@ -55,8 +54,8 @@
                 <i class="bi bi-trophy"></i>
               </div>
               <div class="stat-content">
-                <h4>3x Won Awards</h4>
-                <p class="mb-0">Vestibulum ante ipsum</p>
+                <h4>300+</h4>
+                <p class="mb-0">Buku yang tersedia di Perpustakaan</p>
               </div>
             </div>
           </div>
@@ -66,8 +65,8 @@
                 <i class="bi bi-briefcase"></i>
               </div>
               <div class="stat-content">
-                <h4>6.5k Faucibus</h4>
-                <p class="mb-0">Nullam quis ante</p>
+                <h4>10+</h4>
+                <p class="mb-0">Jumlah Kategori</p>
               </div>
             </div>
           </div>
@@ -77,8 +76,8 @@
                 <i class="bi bi-graph-up"></i>
               </div>
               <div class="stat-content">
-                <h4>80k Mauris</h4>
-                <p class="mb-0">Etiam sit amet orci</p>
+                <h4>1000+</h4>
+                <p class="mb-0">Jumlah Ulasan dan Rating</p>
               </div>
             </div>
           </div>
@@ -88,8 +87,8 @@
                 <i class="bi bi-award"></i>
               </div>
               <div class="stat-content">
-                <h4>6x Phasellus</h4>
-                <p class="mb-0">Vestibulum ante ipsum</p>
+                <h4>1000+</h4>
+                <p class="mb-0">Jumlah Pengguna</p>
               </div>
             </div>
           </div>
