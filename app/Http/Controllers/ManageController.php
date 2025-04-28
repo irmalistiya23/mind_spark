@@ -10,11 +10,17 @@ use Illuminate\Support\Facades\Storage;
 
 class ManageController extends Controller
 {
+    public function indexBuku()
+    {
+        $books = Buku::with('kategoris')->get();
+        return view('manage-buku', compact('books'));
+    }
+
     public function index()
     {
         $users = User::all();
         $books = Buku::with('kategoris')->get();
-        return view('manage', compact('users', 'books'));
+        return view('manage-user', compact('users', 'books'));
     }
 
     // User Management
@@ -22,7 +28,7 @@ class ManageController extends Controller
     {
         $user = User::findOrFail($id);
         $user->delete();
-        return redirect()->route('manage')->with('success', 'User berhasil dihapus');
+        return redirect()->route('manage-user')->with('success', 'User berhasil dihapus');
     }
 
     // Book Management
@@ -61,7 +67,7 @@ class ManageController extends Controller
             $buku->kategoris()->attach($request->kategoris);
         }
 
-        return redirect()->route('manage')
+        return redirect()->route('manage-buku')
             ->with('success', 'Buku berhasil ditambahkan!');
     }
 
@@ -109,7 +115,7 @@ class ManageController extends Controller
 
         $buku->kategoris()->sync($request->kategoris);
 
-        return redirect()->route('manage')
+        return redirect()->route('manage-buku')
             ->with('success', 'Buku berhasil diupdate!');
     }
 
@@ -121,6 +127,6 @@ class ManageController extends Controller
         }
         $book->kategoris()->detach();
         $book->delete();
-        return redirect()->route('manage')->with('success', 'Buku berhasil dihapus');
+        return redirect()->route('manage-buku')->with('success', 'Buku berhasil dihapus');
     }
 }

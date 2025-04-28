@@ -7,13 +7,13 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedInteger('nis');
+            $table->id(); // Auto-increment ID
+            $table->string('nis')->unique(); // NIS sebaiknya string, karena bisa ada nol di depan
             $table->string('nama');
             $table->string('email')->unique();
             $table->string('alamat');
             $table->string('password');
-            $table->string('role');
+            $table->string('role')->default('user'); // Beri default role
             $table->unsignedInteger('jumlah_pelanggaran')->default(0);
             $table->timestamps();
         });
@@ -23,4 +23,3 @@ return new class extends Migration {
         Schema::dropIfExists('users');
     }
 };
-

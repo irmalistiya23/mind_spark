@@ -1,21 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('master')
+@section('konten')
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MindSpark</title>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/manage.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
     <div class="container mt-4">
         <div class="row mb-4">
             <div class="col">
-                <h2>Add New Book</h2>
+                <h2>Tambah Buku Baru</h2>
             </div>
         </div>
 
@@ -31,11 +25,11 @@
 
         <div class="card">
             <div class="card-body">
-                <form action="{{ route('manage.books.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('manage-buku.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     
                     <div class="mb-3">
-                        <label for="NamaBuku" class="form-label">Judul Buku</label>
+                        <label for="NamaBuku" class="form-label">Judul</label>
                         <input type="text" class="form-control" id="NamaBuku" name="NamaBuku" 
                                value="{{ old('NamaBuku') }}" required>
                     </div>
@@ -78,7 +72,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="CoverBuku" class="form-label">Cover Buku</label>
+                        <label for="CoverBuku" class="form-label">Sampul Buku</label>
                         <input type="file" class="form-control" id="CoverBuku" name="CoverBuku" 
                                accept="image/jpeg,image/png,image/jpg" required>
                         <div id="imagePreview" class="mt-2" style="display: none;">
@@ -87,7 +81,7 @@
                     </div>
 
                     <div class="text-end">
-                        <a href="{{ route('manage') }}" class="btn btn-secondary me-2">Batal</a>
+                        <a href="{{ route('manage-buku') }}" class="btn btn-secondary me-2">Batal</a>
                         <button type="submit" class="btn btn-primary">Simpan Buku</button>
                     </div>
                 </form>
@@ -115,3 +109,4 @@
     </script>
 </body>
 </html>
+@endsection

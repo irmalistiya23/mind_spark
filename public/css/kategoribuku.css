@@ -1,0 +1,11 @@
+main{
+    background-color: white;
+    color: black;
+}
+td {
+    color: black;
+    font-weight: 400;
+}
+.form-check-label, .form-label{
+    font-weight: 500;
+}

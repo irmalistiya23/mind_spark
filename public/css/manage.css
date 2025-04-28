@@ -3,7 +3,16 @@ body {
     background-color: #f8f9fa;
     font-family: 'Poppins', sans-serif;
 }
-
+td{
+    font-weight: 400;
+}
+/* Ubah warna teks di dalam modal */
+.modal-content {
+    color: #000000; /* Warna merah */
+}
+.modal-body{
+    font-weight: 400;
+}
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -50,33 +59,6 @@ body {
 .table-hover tbody tr:hover {
     background-color: #f8f9fa;
     transition: background-color 0.2s;
-}
-
-/* Tab Styles */
-.nav-tabs {
-    border-bottom: 2px solid #dee2e6;
-    margin-bottom: 25px;
-}
-
-.nav-tabs .nav-link {
-    border: none;
-    color: #6c757d;
-    font-weight: 500;
-    padding: 12px 20px;
-    margin-right: 5px;
-    transition: all 0.3s;
-}
-
-.nav-tabs .nav-link:hover {
-    color: #007bff;
-    border: none;
-}
-
-.nav-tabs .nav-link.active {
-    color: #007bff;
-    border: none;
-    border-bottom: 2px solid #007bff;
-    background: transparent;
 }
 
 /* Button Styles */
@@ -159,13 +141,6 @@ img {
     overflow: hidden;
 }
 
-/* Empty State */
-.text-center {
-    padding: 30px;
-    color: #6c757d;
-    font-style: italic;
-}
-
 /* Action Buttons Container */
 .action-buttons {
     display: flex;
@@ -210,6 +185,10 @@ img {
     font-weight: 500;
     margin-bottom: 8px;
     color: #495057;
+}
+
+label{
+    font-weight: 700;
 }
 
 .form-text {

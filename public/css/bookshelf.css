@@ -1,0 +1,90 @@
+main{
+    color: black;
+}
+body {
+    background-color: #f8f9fa;
+}
+p{
+    font-weight: 400;
+}
+
+.container {
+    max-width: 900px;
+}
+
+h1, h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.section {
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.borrowed-section {
+    background-color: #fff08d; /* Warna soft orange */
+}
+
+.returned-section {
+    background-color: #94d2ff; /* Warna soft blue */
+}
+
+.card {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card-img-top {
+    height: 250px;
+    object-fit: cover;
+}
+
+.card-body {
+    min-height: 200px;
+    max-height: 250px;
+    text-align: center;
+    padding: 15px;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.card-text {
+    font-size: 14px;
+    color: #666;
+}
+
+.empty-state {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.empty-image {
+    max-width: 200px;
+    margin-bottom: 15px;
+}
+
+.btn-light {
+    border: 1px solid #ddd;
+    padding: 10px 20px;
+    font-size: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.btn-light i {
+    font-size: 18px;
+}

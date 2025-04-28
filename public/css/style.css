@@ -1,11 +1,24 @@
-body {
-    font-family: "Poppins", serif;
+body{
+    background-color: white;
+    font-family: 'Poppins', sans-serif;
     font-weight: 100;
     font-style: normal;
 }
+.search-bar{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+main{
+    color: black;
+}
+
+p{
+    font-weight: 600;
+}
 
 .category-title {
-    margin-bottom: 15px;
+    font-size: 2rem;
+    margin: 15px;
     color: #333;
     font-weight: 600;
 }
@@ -184,6 +197,7 @@ body {
     }
 }
 
+
 /* Book Card Styles */
 .book-card {
     background: white;
@@ -232,7 +246,7 @@ body {
     color: #333;
     margin-bottom: 8px;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    /* -webkit-line-clamp: 2; */
     -webkit-box-orient: vertical;
     overflow: hidden;
     line-height: 1.3;
@@ -295,3 +309,199 @@ body {
     color: #555;
     line-height: 1.6;
 } 
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .book-cover, .no-image {
+        height: 250px;
+    }
+}
+
+@media (max-width: 768px) {
+    .book-cover, .no-image {
+        height: 220px;
+    }
+}
+
+.category-list .btn {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.book-rating {
+    font-size: 1.2rem;
+}
+
+.book-rating .stars {
+    display: inline-block;
+}
+
+.book-rating .rating-text {
+    font-size: 1rem;
+    vertical-align: middle;
+}
+
+.review-item {
+    background-color: #f8f9fa;
+    transition: transform 0.2s;
+}
+
+.review-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.review-item .rating {
+    font-size: 0.9rem;
+    margin-top: 4px;
+}
+
+.review-content {
+    color: #555;
+    line-height: 1.6;
+} 
+
+.rating-stars {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+}
+
+.star-rating input[type="radio"] {
+    display: none;
+}
+
+.star-label {
+    cursor: pointer;
+    padding: 0 2px;
+    font-size: 24px;
+    color: #ddd;
+    transition: color 0.2s;
+}
+
+.star-label:hover,
+.star-label:hover ~ .star-label,
+.star-rating input[type="radio"]:checked ~ .star-label {
+    color: #ffc107;
+}
+
+.star-rating input[type="radio"]:checked + .star-label {
+    color: #ffc107;
+}
+
+/* Styling untuk bintang yang sudah ada */
+.stars .fas.fa-star,
+.stars .fas.fa-star-half-alt,
+.stars .far.fa-star {
+    font-size: 20px;
+    margin-right: 2px;
+}
+
+/* Hover effect untuk bintang edit */
+.modal .star-rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+}
+
+.modal .star-rating input[type="radio"] {
+    display: none;
+}
+
+.modal .star-rating label {
+    cursor: pointer;
+    padding: 0 2px;
+    font-size: 24px;
+    color: #ddd;
+}
+
+.modal .star-rating label:hover,
+.modal .star-rating label:hover ~ label,
+.modal .star-rating input[type="radio"]:checked ~ label {
+    color: #ffc107;
+}
+
+.main-container {
+    min-height: 100vh;
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+
+.content-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+}
+
+/* Styling untuk container review */
+.review-item {
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+/* Styling untuk header review */
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* Styling untuk action buttons container */
+.action-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Styling untuk icon buttons */
+.action-btn {
+    background: transparent;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+}
+
+/* Styling khusus untuk edit button */
+.edit-btn {
+    color: #0d6efd;
+}
+
+.edit-btn:hover {
+    background-color: rgba(13, 110, 253, 0.1);
+    transform: scale(1.1);
+}
+
+/* Styling khusus untuk delete button */
+.delete-btn {
+    color: #dc3545;
+}
+
+.delete-btn:hover {
+    background-color: rgba(220, 53, 69, 0.1);
+    transform: scale(1.1);
+}
+
+/* Styling untuk icon size */
+.action-btn i {
+    font-size: 16px;
+}
+
+/* Styling untuk timestamp */
+.review-timestamp {
+    color: #6c757d;
+    font-size: 14px;
+    margin-left: 15px;
+}
