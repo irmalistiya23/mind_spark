@@ -2,15 +2,17 @@
 @section('konten')
 <!DOCTYPE html>
 <html lang="en">
-
-    <link rel="stylesheet" href="{{ asset('css/buku.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <title>MindSpark</title>
 </head>
 <body>
     <div class="container mt-4">
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1f9037c689a6d47fc8ca5c52941dfcd048cc1c2c
         <div class="row">
             <div class="col-md-5">
                 <div class="book-cover-container">
@@ -198,16 +200,27 @@
                     </div>
                     
                     <!-- Add Review Form -->
+<<<<<<< HEAD
                 <button type="button" class="btn btn-primary mt-4" data-bs-toggle="modal" data-bs-target="#reviewModal">
                     Tambah penilaian anda
                 </button>
+=======
+                    <!-- Button to trigger modal -->
+<button type="button" class="btn btn-primary mt-4" data-bs-toggle="modal" data-bs-target="#reviewModal">
+    Add Your Review
+</button>
+>>>>>>> 1f9037c689a6d47fc8ca5c52941dfcd048cc1c2c
 
 <!-- Review Modal -->
 <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
+<<<<<<< HEAD
                 <h5 class="modal-title" id="reviewModalLabel">Tambah Penilaian</h5>
+=======
+                <h5 class="modal-title" id="reviewModalLabel">Add Your Review</h5>
+>>>>>>> 1f9037c689a6d47fc8ca5c52941dfcd048cc1c2c
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -216,7 +229,11 @@
                     <input type="hidden" name="buku_id" value="{{ $buku->id }}">
                     
                     <div class="rating-input mb-3">
+<<<<<<< HEAD
                         <label class="form-label">Bintang:</label>
+=======
+                        <label class="form-label">Your Rating:</label>
+>>>>>>> 1f9037c689a6d47fc8ca5c52941dfcd048cc1c2c
                         <div class="star-rating">
                             <div class="rating-stars">
                                 @for($i = 5; $i >= 1; $i--)
@@ -230,11 +247,19 @@
                     </div>
 
                     <div class="mb-3">
+<<<<<<< HEAD
                         <label for="review" class="form-label">Komentar:</label>
                         <textarea class="form-control" id="review" name="ulasan" rows="3" required></textarea>
                     </div>
 
                     <button type="submit" class="btn btn-primary">Kirim Penilaian</button>
+=======
+                        <label for="review" class="form-label">Your Review:</label>
+                        <textarea class="form-control" id="review" name="ulasan" rows="3" required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit Review</button>
+>>>>>>> 1f9037c689a6d47fc8ca5c52941dfcd048cc1c2c
                 </form>
             </div>
         </div>
@@ -251,7 +276,11 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
+<<<<<<< HEAD
                         <h5 class="modal-title">Ubah Penilaian</h5>
+=======
+                        <h5 class="modal-title">Edit Review</h5>
+>>>>>>> 1f9037c689a6d47fc8ca5c52941dfcd048cc1c2c
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form action="{{ route('ulasan.update', $ulasan->id) }}" method="POST">
@@ -259,7 +288,11 @@
                         @method('PUT')
                         <div class="modal-body">
                             <div class="mb-3">
+<<<<<<< HEAD
                                 <label class="form-label">Bintang:</label>
+=======
+                                <label class="form-label">Rating:</label>
+>>>>>>> 1f9037c689a6d47fc8ca5c52941dfcd048cc1c2c
                                 <div class="star-rating">
                                     @for($i = 5; $i >= 1; $i--)
                                         <input type="radio" 
@@ -276,7 +309,11 @@
                             </div>
 
                             <div class="mb-3">
+<<<<<<< HEAD
                                 <label for="ulasan{{ $ulasan->id }}" class="form-label">Komentar:</label>
+=======
+                                <label for="ulasan{{ $ulasan->id }}" class="form-label">Your Review:</label>
+>>>>>>> 1f9037c689a6d47fc8ca5c52941dfcd048cc1c2c
                                 <textarea class="form-control" 
                                           id="ulasan{{ $ulasan->id }}" 
                                           name="ulasan" 
@@ -285,8 +322,13 @@
                             </div>
                         </div>
                         <div class="modal-footer">
+<<<<<<< HEAD
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                             <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+=======
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+>>>>>>> 1f9037c689a6d47fc8ca5c52941dfcd048cc1c2c
                         </div>
                     </form>
                 </div>
@@ -315,13 +357,7 @@
                 </div>
             @endforeach
         </div>
-
-
     </div>
-
-    
-
-
 
 </body>
     <script>
@@ -354,7 +390,6 @@
                             // Tampilkan modal pop-up
                             borrowModal.show();
                         } else {
-                            // Jika terjadi error atau buku sudah dipinjam (meski seharusnya tidak terjadi), tampilkan pesan error
                             alert(data.message || 'An error occurred.');
                         }
                     })
@@ -388,6 +423,89 @@
                 });
             }
         });
+
+        document.getElementById('reviewForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            
+            fetch(this.action, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
+                    'Accept': 'application/json',
+                },
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Create new review HTML
+                    const newReview = `
+                        <div class="review-item mb-4">
+                            <div class="review-header d-flex justify-content-between align-items-center">
+                                <div class="user-info">
+                                    <strong>${data.review.user.name}</strong>
+                                    <div class="rating">
+                                        ${Array(5).fill(0).map((_, i) => 
+                                            i < data.review.Rating ? 
+                                            '<i class="fas fa-star text-warning"></i>' : 
+                                            '<i class="far fa-star text-warning"></i>'
+                                        ).join('')}
+                                    </div>
+                                </div>
+                                <small class="text-muted">Just now</small>
+                            </div>
+                            <div class="review-content mt-2">${data.review.Ulasan}</div>
+                        </div>
+                    `;
+
+                    // Add the new review to the review container
+                    const reviewContainer = document.querySelector('.review-container');
+                    if (reviewContainer) {
+                        reviewContainer.insertAdjacentHTML('afterbegin', newReview);
+                    } else {
+                        // If no reviews existed before, replace the "no reviews" message
+                        const reviewsSection = document.querySelector('.reviews');
+                        reviewsSection.innerHTML = `
+                            <h4>Reviews (1)</h4>
+                            <div class="review-container">
+                                ${newReview}
+                            </div>
+                        ` + reviewsSection.querySelector('.add-review-form').outerHTML;
+                    }
+
+                    // Update review count
+                    const reviewCountElement = document.querySelector('.reviews h4');
+                    const currentCount = parseInt(reviewCountElement.textContent.match(/\d+/)[0]);
+                    reviewCountElement.textContent = `Reviews (${currentCount + 1})`;
+
+                    // Clear the form
+                    this.reset();
+
+                    // Show success message
+                    alert('Review submitted successfully!');
+                } else {
+                    alert(data.message || 'Review submitted successfully!');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Review submitted successfully!');
+            });
+        });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Reset form when modal is closed
+        const editModals = document.querySelectorAll('.modal');
+        editModals.forEach(modal => {
+            modal.addEventListener('hidden.bs.modal', function() {
+                const form = this.querySelector('form');
+                if (form) form.reset();
+            });
+        });
+    });
+
         </script>
 </html>
 @endsection

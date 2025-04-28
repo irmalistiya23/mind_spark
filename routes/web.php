@@ -70,9 +70,11 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori');
 Route::get('/buku/{id}', [BukuController::class, 'show'])->name('buku.show');
 
-// Route Ulasan
+// Routes for Ulasan (Reviews)
 Route::middleware(['auth'])->group(function () {
     Route::post('/ulasan', [UlasanController::class, 'store'])->name('ulasan.store');
+    Route::put('/ulasan/{ulasan}', [UlasanController::class, 'update'])->name('ulasan.update');
+    Route::delete('/ulasan/{ulasan}', [UlasanController::class, 'destroy'])->name('ulasan.destroy');
 });
 
 // Route untuk Manajemen User
@@ -126,5 +128,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/ulasan/{ulasan}', [UlasanController::class, 'update'])->name('ulasan.update');
     Route::delete('/ulasan/{ulasan}', [UlasanController::class, 'destroy'])->name('ulasan.destroy');
 });
+
+?>
 
 ?>

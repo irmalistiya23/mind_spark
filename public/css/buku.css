@@ -71,6 +71,7 @@ p{
         color: #666;
         margin: 0;
     }
+<<<<<<< HEAD
 
     .star-rating input[type="radio"] {
         display: none;
@@ -125,4 +126,71 @@ p{
     .modal .star-rating input[type="radio"]:checked ~ label {
         color: #ffc107;
     }
+=======
+    
+    .rating-stars {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+    }
+
+    .rating-stars input {
+        display: none;
+    }
+
+    .rating-stars label {
+        cursor: pointer;
+        padding: 0 0.1em;
+        font-size: 1.5em;
+    }
+
+    .rating-stars label:hover,
+    .rating-stars label:hover ~ label,
+    .rating-stars input:checked ~ label {
+        color: #ffc107;
+    }
+
+/* Styling untuk container action buttons */
+.review-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Styling untuk buttons */
+.action-btn {
+    background: none;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    display: flex;
+    align-items: center;
+}
+
+/* Hover effect untuk buttons */
+.action-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Styling untuk icons */
+.action-btn i {
+    font-size: 16px;
+}
+
+.edit-icon {
+    color: #007bff;
+}
+
+.delete-icon {
+    color: #dc3545;
+}
+
+/* Styling untuk timestamp */
+.review-timestamp {
+    color: #6c757d;
+    font-size: 0.875rem;
+    margin-left: 12px;
+}
+>>>>>>> 1f9037c689a6d47fc8ca5c52941dfcd048cc1c2c
     
